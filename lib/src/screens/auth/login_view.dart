@@ -31,8 +31,6 @@ class LoginView extends StatelessWidget {
           final formStatus = state.formStatus;
           if (formStatus is FormFailure) {
             _showSnackBar(context, formStatus.error, Colors.red);
-          } else if (formStatus is FormSuccess) {
-            _showSnackBar(context, "Login Success", Colors.green);
           }
         },
         child: Center(

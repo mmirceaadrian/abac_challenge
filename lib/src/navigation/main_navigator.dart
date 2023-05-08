@@ -1,8 +1,11 @@
 import 'package:abac_challenge/src/bloc/main/main_cubit.dart';
 import 'package:abac_challenge/src/bloc/main/main_state.dart';
 import 'package:abac_challenge/src/repository/spaceships_repo.dart';
+import 'package:abac_challenge/src/screens/main/myspaceship_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../screens/main/myappointments_view.dart';
 
 class MainNavigator extends StatelessWidget {
   const MainNavigator({Key? key}) : super(key: key);
@@ -20,11 +23,11 @@ class MainNavigator extends StatelessWidget {
             pages: [
               if (state is SpaceshipsState)
                 MaterialPage(
-                  child: Container(color: Colors.red),
+                  child: SpaceshipView(),
                 ),
               if (state is AppointmentsState)
                 MaterialPage(
-                  child: Container(color: Colors.blue),
+                  child: AppointmentsView(),
                 )
             ],
             onPopPage: (route, result) => route.didPop(result),
