@@ -41,7 +41,10 @@ Card buildCard(var title, var subtitle, var cardImageUrl) {
           ButtonBar(
             children: [
               TextButton(
-                child: const Text('CONTACT AGENT'),
+                child: const Text(
+                  'DIAGNOSE',
+                  style: TextStyle(color: Colors.red),
+                ),
                 onPressed: () {/* ... */},
               )
             ],
