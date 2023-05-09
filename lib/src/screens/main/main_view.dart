@@ -40,11 +40,11 @@ class MainView extends StatelessWidget {
                     tabs: const [
                       GButton(
                         icon: Icons.car_rental,
-                        text: "Spaceships",
+                        text: "Nave spatiale",
                       ),
                       GButton(
                         icon: Icons.assignment,
-                        text: "Appointments",
+                        text: "Programari",
                       )
                     ],
                   ),
