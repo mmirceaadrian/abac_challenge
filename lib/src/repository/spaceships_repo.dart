@@ -12,6 +12,8 @@ import '../../config/config.dart';
 class SpaceshipsRepo {
   /// This method is used to get the spaceships from the API
   Future<List<Spaceship>> getSpaceships() async {
+    // should request just some spaceships, not all, in order to improve performance and avoid a lot of data
+    // in order to do that, we should use a pagination system, and request from backend just a few spaceships per page
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? token = prefs.getString('token');
 

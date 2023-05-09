@@ -1,5 +1,5 @@
 class SpaceshipComponent {
-  String spaceshipComponentId;
+  int spaceshipComponentId;
   String name;
   int price;
   int quantity;
@@ -21,7 +21,7 @@ class SpaceshipComponent {
   }
 
   SpaceshipComponent copyWith({
-    String? spaceshipComponentId,
+    int? spaceshipComponentId,
     String? name,
     int? price,
     int? quantity,

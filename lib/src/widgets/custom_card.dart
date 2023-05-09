@@ -48,7 +48,10 @@ Card buildCard(var title, var subtitle, var cardImageUrl) {
                   return TextButton(
                     child: const Text(
                       'DIAGNOSE',
-                      style: TextStyle(color: Colors.red),
+                      style: TextStyle(
+                          color: kPrimaryLightColor,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
                     ),
                     onPressed: () {
                       context.read<MainCubit>().showDiagnoseStespper();

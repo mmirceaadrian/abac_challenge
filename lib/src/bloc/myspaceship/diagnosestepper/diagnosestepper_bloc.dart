@@ -17,6 +17,7 @@ class DiagnoseStepperBloc
     if (event is DiagnoseStepperSearch) {
       try {
         var components = await diagnoseRepo.searchComponent(event.query);
+        print(components);
         emit(state.copyWith(searchedComponents: components));
       } catch (e) {
         emit(state.copyWith(searchedComponents: []));
