@@ -1,6 +1,9 @@
 import 'package:abac_challenge/constants.dart';
 import 'package:flutter/material.dart';
 
+/// This method is used to build a card
+///
+/// The card is used to display information about a spaceship
 Card buildCard(var title, var subtitle, var cardImageUrl) {
   var heading = title;
   var subheading = subtitle;
