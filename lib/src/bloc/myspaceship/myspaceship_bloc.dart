@@ -4,7 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../repository/spaceships_repo.dart';
 
+/// Bloc for the myspaceship screen
+///
+/// This bloc is used to manage the state of the myspaceship screen
 class MyspaceshipBloc extends Bloc<MyspaceshipEvent, MyspaceshipState> {
+  /// Repository for the spaceships
   final SpaceshipsRepo spaceshipsRepo;
 
   MyspaceshipBloc({required this.spaceshipsRepo})
@@ -12,6 +16,7 @@ class MyspaceshipBloc extends Bloc<MyspaceshipEvent, MyspaceshipState> {
     on<MyspaceshipEvent>(_onEvent);
   }
 
+  /// This method is used to manage the events of the bloc
   Future<void> _onEvent(
       MyspaceshipEvent event, Emitter<MyspaceshipState> emit) async {
     if (event is MyspaceshipEventLoading) {
