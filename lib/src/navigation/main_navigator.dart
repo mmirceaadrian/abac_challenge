@@ -1,5 +1,6 @@
 import 'package:abac_challenge/src/bloc/main/main_cubit.dart';
 import 'package:abac_challenge/src/bloc/main/main_state.dart';
+import 'package:abac_challenge/src/repository/diagnose_repo.dart';
 import 'package:abac_challenge/src/repository/spaceships_repo.dart';
 import 'package:abac_challenge/src/screens/main/myspaceships/diagnose_stepper_view.dart';
 import 'package:abac_challenge/src/screens/main/myspaceships/myspaceship_view.dart';
@@ -23,15 +24,17 @@ class MainNavigator extends StatelessWidget {
             RepositoryProvider<SpaceshipsRepo>(
               create: (context) => SpaceshipsRepo(),
             ),
+            RepositoryProvider<DiagnoseRepo>(
+              create: (context) => DiagnoseRepo(),
+            )
           ],
           child: Navigator(
             pages: [
-              if (state is SpaceshipsState ||
-                  state is DiagnoseStepperState) ...[
+              if (state is SpaceshipsState || state is DiagnoseState) ...[
                 MaterialPage(
                   child: SpaceshipView(),
                 ),
-                if (state is DiagnoseStepperState)
+                if (state is DiagnoseState)
                   MaterialPage(
                     child: DiagnoseStepperView(),
                   )

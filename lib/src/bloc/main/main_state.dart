@@ -11,6 +11,6 @@ class AppointmentsState extends MainState {
   const AppointmentsState() : super(1);
 }
 
-class DiagnoseStepperState extends MainState {
-  const DiagnoseStepperState() : super(0);
+class DiagnoseState extends MainState {
+  const DiagnoseState() : super(0);
 }

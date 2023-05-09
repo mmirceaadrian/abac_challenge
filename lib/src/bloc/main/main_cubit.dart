@@ -9,7 +9,7 @@ class MainCubit extends Cubit<MainState> {
 
   void showSpaceships() => emit(SpaceshipsState());
   void showAppointments() => emit(AppointmentsState());
-  void showDiagnoseStespper() => emit(DiagnoseStepperState());
+  void showDiagnoseStespper() => emit(DiagnoseState());
 
   /// This method is used to show the screen by index
   ///
