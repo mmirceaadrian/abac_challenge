@@ -33,11 +33,4 @@ class DiagnoseStepperView extends StatelessWidget {
       isActive: true,
     );
   }
-
-  SizedBox _gap() {
-    return const SizedBox(
-      height: 20,
-      width: 20,
-    );
-  }
 }

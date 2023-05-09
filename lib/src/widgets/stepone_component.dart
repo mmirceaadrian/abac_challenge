@@ -8,119 +8,219 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 Step stepOne() {
   var currentQuantity = 1;
   return Step(
-    title: Text('Create estimate'),
-    content: BlocBuilder<DiagnoseStepperBloc, DiagnoseStepperState>(
-      builder: (context, state) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Task 1'),
-            // list of installed components
-            Container(
-              constraints: BoxConstraints(maxWidth: 300),
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: state.selectedComponents.length,
-                itemBuilder: (context, index) {
-                  var component = state.selectedComponents[index];
-                  return ListTile(
-                    title: Text(component.name),
-                    subtitle: Text('Quantity: ${component.quantity}'),
-                    trailing: IconButton(
-                      onPressed: () {
-                        context.read<DiagnoseStepperBloc>().add(
-                              DiagnoseStepperAddComponent(
-                                spaceshipComponent: component,
-                                quantity: -1,
-                              ),
-                            );
-                      },
-                      icon: Icon(Icons.remove),
-                    ),
-                  );
-                },
-              ),
+    label: Text('Creaza deviz'),
+    title: Text(''),
+    content: BlocListener<DiagnoseStepperBloc, DiagnoseStepperState>(
+      listener: (context, state) {
+        if (state.error != '') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.error!),
+              backgroundColor: Colors.red,
             ),
-            _gap(),
-            // search component
-            Row(
-              children: [
-                // search bar field
-                Container(
-                  constraints: BoxConstraints(maxWidth: 300),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'Search component',
-                      icon: Icon(Icons.search),
-                    ),
-                    onChanged: (value) {
-                      context
-                          .read<DiagnoseStepperBloc>()
-                          .add(DiagnoseStepperSearch(query: value));
-                    },
+          );
+        }
+      },
+      child: BlocBuilder<DiagnoseStepperBloc, DiagnoseStepperState>(
+        builder: (context, state) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Task 1',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              _gap(),
+              // list of installed components
+              Table(
+                border: TableBorder(
+                  horizontalInside: BorderSide(
+                    color: Colors.grey,
+                    width: 2,
+                  ),
+                  bottom: BorderSide(
+                    color: Colors.grey,
+                    width: 2,
                   ),
                 ),
-                _gap(),
-                // quantity field
-                Container(
-                  constraints: BoxConstraints(maxWidth: 70),
-                  child: TextFormField(
-                    textAlign: TextAlign.center,
-                    keyboardType: TextInputType.number,
-                    initialValue: currentQuantity.toString(),
-                    decoration: InputDecoration(
-                      labelText: 'Quantity',
-                    ),
-                    onChanged: (value) {
-                      currentQuantity = int.parse(value);
-                    },
-                  ),
-                )
-              ],
-            ),
-            _gap(),
-            // list of searched components
-            if (state.searchedComponents.isNotEmpty)
-              Container(
-                constraints: BoxConstraints(maxWidth: 350),
-                padding: EdgeInsets.all(10),
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  // this paginate should be done in the backend side
-                  // now, we are just limiting the search to 5 results
-                  itemCount: state.searchedComponents.length > 5
-                      ? 5
-                      : state.searchedComponents.length,
-                  itemBuilder: (context, index) {
-                    var component = state.searchedComponents[index];
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ListTile(
-                        title: Text(component.name),
-                        trailing: CircleAvatar(
-                          radius: 30,
-                          backgroundColor: kPrimaryColor,
-                          child: IconButton(
-                            onPressed: () {
-                              context.read<DiagnoseStepperBloc>().add(
-                                    DiagnoseStepperAddComponent(
-                                      spaceshipComponent: component,
-                                      quantity: currentQuantity,
-                                    ),
-                                  );
-                            },
-                            icon: Icon(Icons.add),
+                children: [
+                  TableRow(
+                    children: const [
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: TableCell(
+                          child: Text(
+                            'Produs',
+                            style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
-                    );
-                  },
-                ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: TableCell(
+                          child: Text('Cantitate',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: TableCell(
+                          child: Text('Pret unitar',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: TableCell(
+                          child: Text('Total',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                        ),
+                      )
+                    ],
+                  ),
+                  ...state.selectedComponents.map(
+                    (component) {
+                      return TableRow(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TableCell(
+                              child: Text(
+                                component.name,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TableCell(
+                              child: Text(
+                                '${component.quantity}',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TableCell(
+                              child: Text(
+                                '${component.price}',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TableCell(
+                              child: Text(
+                                '${component.quantityPrice}',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ],
               ),
-            if (state.searchedComponents.isEmpty) Text('No components found'),
-          ],
-        );
-      },
+              _gap(),
+              // search component
+              Row(
+                children: [
+                  // search bar field
+                  Container(
+                    constraints: BoxConstraints(maxWidth: 300),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        labelText: 'Search component',
+                        icon: Icon(Icons.search),
+                      ),
+                      onChanged: (value) {
+                        context
+                            .read<DiagnoseStepperBloc>()
+                            .add(DiagnoseStepperSearch(query: value));
+                      },
+                    ),
+                  ),
+                  _gap(),
+                  // quantity field
+                  Container(
+                    constraints: BoxConstraints(maxWidth: 70),
+                    child: TextFormField(
+                      textAlign: TextAlign.center,
+                      keyboardType: TextInputType.number,
+                      initialValue: currentQuantity.toString(),
+                      decoration: InputDecoration(
+                        labelText: 'Quantity',
+                      ),
+                      onChanged: (value) {
+                        currentQuantity = int.parse(value);
+                      },
+                    ),
+                  )
+                ],
+              ),
+              _gap(),
+              // list of searched components
+              if (state.searchedComponents.isNotEmpty)
+                Container(
+                  constraints: BoxConstraints(maxWidth: 350),
+                  padding: EdgeInsets.all(10),
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    // this paginate should be done in the backend side
+                    // now, we are just limiting the search to 5 results
+                    itemCount: state.searchedComponents.length > 5
+                        ? 5
+                        : state.searchedComponents.length,
+                    itemBuilder: (context, index) {
+                      var component = state.searchedComponents[index];
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListTile(
+                          title: Text(component.name),
+                          trailing: CircleAvatar(
+                            radius: 30,
+                            backgroundColor: kPrimaryColor,
+                            child: IconButton(
+                              onPressed: () {
+                                context.read<DiagnoseStepperBloc>().add(
+                                      DiagnoseStepperAddComponent(
+                                        spaceshipComponent: component,
+                                        quantity: currentQuantity,
+                                      ),
+                                    );
+                              },
+                              icon: Icon(Icons.add),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              if (state.searchedComponents.isEmpty) Text('No components found'),
+            ],
+          );
+        },
+      ),
     ),
     isActive: true,
   );
