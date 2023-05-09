@@ -1,11 +1,12 @@
 import 'package:abac_challenge/src/bloc/main/main_cubit.dart';
 import 'package:abac_challenge/src/bloc/main/main_state.dart';
 import 'package:abac_challenge/src/repository/spaceships_repo.dart';
-import 'package:abac_challenge/src/screens/main/myspaceship_view.dart';
+import 'package:abac_challenge/src/screens/main/myspaceships/diagnose_stepper_view.dart';
+import 'package:abac_challenge/src/screens/main/myspaceships/myspaceship_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../screens/main/myappointments_view.dart';
+import '../screens/main/myappointments/myappointments_view.dart';
 
 /// Navigator for the main screen
 ///
@@ -25,10 +26,16 @@ class MainNavigator extends StatelessWidget {
           ],
           child: Navigator(
             pages: [
-              if (state is SpaceshipsState)
+              if (state is SpaceshipsState ||
+                  state is DiagnoseStepperState) ...[
                 MaterialPage(
                   child: SpaceshipView(),
                 ),
+                if (state is DiagnoseStepperState)
+                  MaterialPage(
+                    child: DiagnoseStepperView(),
+                  )
+              ],
               if (state is AppointmentsState)
                 MaterialPage(
                   child: AppointmentsView(),

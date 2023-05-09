@@ -13,7 +13,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 ///
 /// It uses a [BlocBuilder] to build the UI based on the [MyspaceshipState]
 class SpaceshipView extends StatelessWidget {
-  /// Constructor for the [SpaceshipView]
   const SpaceshipView({Key? key}) : super(key: key);
 
   /// This method builds the UI based on the [MyspaceshipState]

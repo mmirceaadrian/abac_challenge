@@ -1,5 +1,8 @@
 import 'package:abac_challenge/constants.dart';
+import 'package:abac_challenge/src/bloc/main/main_cubit.dart';
+import 'package:abac_challenge/src/bloc/main/main_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// This method is used to build a card
 ///
@@ -40,12 +43,18 @@ Card buildCard(var title, var subtitle, var cardImageUrl) {
           ),
           ButtonBar(
             children: [
-              TextButton(
-                child: const Text(
-                  'DIAGNOSE',
-                  style: TextStyle(color: Colors.red),
-                ),
-                onPressed: () {/* ... */},
+              BlocBuilder<MainCubit, MainState>(
+                builder: (context, state) {
+                  return TextButton(
+                    child: const Text(
+                      'DIAGNOSE',
+                      style: TextStyle(color: Colors.red),
+                    ),
+                    onPressed: () {
+                      context.read<MainCubit>().showDiagnoseStespper();
+                    },
+                  );
+                },
               )
             ],
           )

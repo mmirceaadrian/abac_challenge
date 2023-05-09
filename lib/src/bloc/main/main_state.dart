@@ -10,3 +10,7 @@ class SpaceshipsState extends MainState {
 class AppointmentsState extends MainState {
   const AppointmentsState() : super(1);
 }
+
+class DiagnoseStepperState extends MainState {
+  const DiagnoseStepperState() : super(0);
+}
