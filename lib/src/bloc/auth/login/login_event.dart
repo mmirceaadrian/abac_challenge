@@ -1,22 +1,21 @@
-abstract class LoginEvent{}
+abstract class LoginEvent {}
 
-class LoginEmailChanged extends LoginEvent{
+class LoginEmailChanged extends LoginEvent {
   final String email;
 
   LoginEmailChanged({required this.email});
 }
 
-class LoginPasswordChanged extends LoginEvent{
+class LoginPasswordChanged extends LoginEvent {
   final String password;
 
   LoginPasswordChanged({required this.password});
 }
 
-class LoginPasswordVisibilityChanged extends LoginEvent{
+class LoginPasswordVisibilityChanged extends LoginEvent {
   final bool isVisible;
 
   LoginPasswordVisibilityChanged({required this.isVisible});
 }
 
-class LoginSubmitted extends LoginEvent{
-}
+class LoginSubmitted extends LoginEvent {}

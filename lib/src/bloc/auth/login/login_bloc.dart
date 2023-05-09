@@ -6,33 +6,37 @@ import '../../form_state.dart';
 import 'login_event.dart';
 import 'login_state.dart';
 
+/// Bloc for the login screen
+///
+/// This bloc is used to manage the state of the login screen
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
+  /// Repository for the authentication
   final AuthRepo authRepo;
+
+  /// Cubit for the authentication
   final AuthCubit authCubit;
 
-  LoginBloc({required this.authRepo, required this.authCubit}) : super(LoginState()){
+  LoginBloc({required this.authRepo, required this.authCubit})
+      : super(LoginState()) {
     on<LoginEvent>(_onEvent);
   }
 
+  /// This method is used to manage the events of the bloc
   Future<void> _onEvent(LoginEvent event, Emitter<LoginState> emit) async {
-    // email changed
-    if(event is LoginEmailChanged){
+    if (event is LoginEmailChanged) {
       emit(state.copyWith(email: event.email));
-    // password changed
-    }else if(event is LoginPasswordChanged){
+    } else if (event is LoginPasswordChanged) {
       emit(state.copyWith(password: event.password));
-    // password visibility changed
-    }else if(event is LoginPasswordVisibilityChanged){
+    } else if (event is LoginPasswordVisibilityChanged) {
       emit(state.copyWith(isPasswordVisible: !state.isPasswordVisible));
-    // login submitted
-    }else if(event is LoginSubmitted){
+    } else if (event is LoginSubmitted) {
       emit(state.copyWith(formStatus: const FormSubmitting()));
-      try{
+      try {
         final token = await authRepo.login(state.email, state.password);
         emit(state.copyWith(formStatus: const FormSuccess()));
         emit(state.copyWith(formStatus: const FormInitial()));
         authCubit.showSession(token);
-      }catch(e){
+      } catch (e) {
         emit(state.copyWith(
             formStatus: FormFailure(
                 error: e.toString().replaceAll("Exception: ", ""))));
