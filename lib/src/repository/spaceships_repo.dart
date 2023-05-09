@@ -27,7 +27,6 @@ class SpaceshipsRepo {
       for (var spaceship in spaceshipList) {
         returnList.add(Spaceship.fromJson(spaceship));
       }
-      print(returnList);
       return returnList;
     } else {
       throw Exception('Failed to load data');

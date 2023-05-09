@@ -1,3 +1,4 @@
+import 'package:abac_challenge/constants.dart';
 import 'package:flutter/material.dart';
 
 Card buildCard(var title, var subtitle, var cardImageUrl) {
@@ -17,8 +18,8 @@ Card buildCard(var title, var subtitle, var cardImageUrl) {
           Image(
             image: cardImage,
             fit: BoxFit.fill,
-            height: 200.0,
-            width: 400.0,
+            height: kCardImageHeight,
+            width: kCardImageWidth,
             alignment: Alignment.center,
           ),
           Container(
