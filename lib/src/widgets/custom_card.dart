@@ -11,11 +11,16 @@ Card buildCard(var title, var subtitle, var cardImageUrl) {
   var supportingText =
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
   return Card(
+      color: kSecondaryColor,
       elevation: 4.0,
       child: Column(
         children: [
           ListTile(
-            title: Text(heading, style: TextStyle(fontWeight: FontWeight.bold)),
+            title: Text(
+              heading,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            textColor: Colors.white,
             subtitle: Text(subheading),
           ),
           Image(
@@ -28,7 +33,10 @@ Card buildCard(var title, var subtitle, var cardImageUrl) {
           Container(
             padding: EdgeInsets.all(16.0),
             alignment: Alignment.centerLeft,
-            child: Text(supportingText),
+            child: Text(
+              supportingText,
+              style: TextStyle(color: Colors.white),
+            ),
           ),
           ButtonBar(
             children: [

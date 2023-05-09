@@ -12,7 +12,6 @@ class AuthRepo {
   /// This method is used to attempt the auto login
   Future<String> attemptAutoLogin() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove('token');
     final String? token = prefs.getString('token');
     if (token != null) {
       return token;

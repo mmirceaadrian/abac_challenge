@@ -32,32 +32,39 @@ class SpaceshipView extends StatelessWidget {
               );
             }
             return MediaQuery.of(context).size.width > kWidth
-                ? GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 8,
-                      mainAxisSpacing: 8,
-                      childAspectRatio:
-                          aspectRatio(MediaQuery.of(context).size.width),
+                ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 8,
+                        mainAxisSpacing: 8,
+                        childAspectRatio:
+                            aspectRatio(MediaQuery.of(context).size.width),
+                      ),
+                      itemCount: state.spaceships.length,
+                      itemBuilder: (context, index) {
+                        var spaceship = state.spaceships[index];
+                        return buildCard("${spaceship.name}-${spaceship.model}",
+                            "${spaceship.year}", spaceship.image);
+                      },
                     ),
-                    itemCount: state.spaceships.length,
-                    itemBuilder: (context, index) {
-                      var spaceship = state.spaceships[index];
-                      return buildCard("${spaceship.name}-${spaceship.model}",
-                          "${spaceship.year}", spaceship.image);
-                    },
                   )
-                : ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemCount: state.spaceships.length,
-                    itemBuilder: (context, index) {
-                      var spaceship = state.spaceships[index];
-                      return buildCard("${spaceship.name}-${spaceship.model}",
-                          "${spaceship.year}", spaceship.image);
-                    },
+                : Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: state.spaceships.length,
+                      itemBuilder: (context, index) {
+                        var spaceship = state.spaceships[index];
+                        return buildCard("${spaceship.name}-${spaceship.model}",
+                            "${spaceship.year}", spaceship.image);
+                      },
+                    ),
                   );
           },
         ),
+        backgroundColor: bgColor,
       ),
     );
   }

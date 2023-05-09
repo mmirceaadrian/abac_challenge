@@ -26,11 +26,11 @@ class MainView extends StatelessWidget {
                       topRight: Radius.circular(3)),
                 ),
                 child: Container(
-                  color: kPrimaryColor,
+                  color: kSecondaryColor,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                   child: GNav(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    backgroundColor: kPrimaryColor,
+                    backgroundColor: kSecondaryColor,
                     tabBackgroundColor: Colors.white.withOpacity(0.1),
                     color: Colors.white,
                     activeColor: Colors.white,
