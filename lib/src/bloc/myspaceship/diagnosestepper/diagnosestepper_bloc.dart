@@ -23,13 +23,12 @@ class DiagnoseStepperBloc
       }
     }
     if (event is DiagnoseStepperAddComponent) {
-      // check if component is already in list
-      // else pop error
       var index = state.selectedComponents.indexWhere((element) =>
           element.spaceshipComponentId ==
           event.spaceshipComponent.spaceshipComponentId);
 
       if (index == -1) {
+        event.spaceshipComponent.quantity = event.quantity;
         emit(state.copyWith(selectedComponents: [
           ...state.selectedComponents,
           event.spaceshipComponent
