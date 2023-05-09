@@ -47,7 +47,7 @@ Card buildCard(var title, var subtitle, var cardImageUrl) {
                 builder: (context, state) {
                   return TextButton(
                     child: const Text(
-                      'DIAGNOSE',
+                      'DIAGNOSTIC',
                       style: TextStyle(
                           color: kPrimaryLightColor,
                           fontSize: 16,

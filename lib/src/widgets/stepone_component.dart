@@ -75,7 +75,8 @@ Step stepOne() {
                           child: Text('Total',
                               style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
-                      )
+                      ),
+                      SizedBox(),
                     ],
                   ),
                   ...state.selectedComponents.map(
@@ -134,6 +135,19 @@ Step stepOne() {
                               ),
                             ),
                           ),
+                          TableCell(
+                            child: IconButton(
+                              onPressed: () {
+                                context.read<DiagnoseStepperBloc>().add(
+                                      DiagnoseStepperRemoveComponent(
+                                        spaceshipComponent: component,
+                                      ),
+                                    );
+                              },
+                              icon: Icon(Icons.delete),
+                              splashRadius: 15,
+                            ),
+                          ),
                         ],
                       );
                     },
@@ -149,7 +163,7 @@ Step stepOne() {
                     constraints: BoxConstraints(maxWidth: 300),
                     child: TextFormField(
                       decoration: InputDecoration(
-                        labelText: 'Search component',
+                        labelText: 'Cauta componenta',
                         icon: Icon(Icons.search),
                       ),
                       onChanged: (value) {
@@ -168,10 +182,14 @@ Step stepOne() {
                       keyboardType: TextInputType.number,
                       initialValue: currentQuantity.toString(),
                       decoration: InputDecoration(
-                        labelText: 'Quantity',
+                        labelText: 'Cantitate',
                       ),
                       onChanged: (value) {
-                        currentQuantity = int.parse(value);
+                        try {
+                          currentQuantity = int.parse(value);
+                        } catch (e) {
+                          currentQuantity = 1;
+                        }
                       },
                     ),
                   )
@@ -216,7 +234,7 @@ Step stepOne() {
                     },
                   ),
                 ),
-              if (state.searchedComponents.isEmpty) Text('No components found'),
+              if (state.searchedComponents.isEmpty) Text('Niciun rezultat'),
             ],
           );
         },

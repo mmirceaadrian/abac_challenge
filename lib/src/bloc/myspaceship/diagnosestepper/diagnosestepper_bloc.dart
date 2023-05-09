@@ -16,6 +16,10 @@ class DiagnoseStepperBloc
       DiagnoseStepperEvent event, Emitter<DiagnoseStepperState> emit) async {
     if (event is DiagnoseStepperSearch) {
       try {
+        if (event.query.isEmpty) {
+          emit(state.copyWith(searchedComponents: []));
+          return;
+        }
         var components = await diagnoseRepo.searchComponent(event.query);
         emit(state.copyWith(searchedComponents: components));
       } catch (e) {
@@ -35,6 +39,17 @@ class DiagnoseStepperBloc
         ], error: ''));
       } else {
         emit(state.copyWith(error: 'Component already added'));
+      }
+    }
+    if (event is DiagnoseStepperRemoveComponent) {
+      var index = state.selectedComponents.indexWhere((element) =>
+          element.spaceshipComponentId ==
+          event.spaceshipComponent.spaceshipComponentId);
+
+      if (index != -1) {
+        var selectedComponents = state.selectedComponents;
+        selectedComponents.removeAt(index);
+        emit(state.copyWith(selectedComponents: selectedComponents));
       }
     }
   }
