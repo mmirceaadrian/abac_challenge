@@ -1,6 +1,6 @@
 import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestepper_bloc.dart';
-import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestepper_state.dart';
 import 'package:abac_challenge/src/repository/diagnose_repo.dart';
+import 'package:abac_challenge/src/widgets/stepOne_component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -34,21 +34,10 @@ class DiagnoseStepperView extends StatelessWidget {
     );
   }
 
-  Step stepOne() {
-    return Step(
-      title: Text('Create estimate'),
-      content: BlocBuilder<DiagnoseStepperBloc, DiagnoseStepperState>(
-        builder: (context, state) {
-          return Text('test');
-        },
-      ),
-      isActive: true,
-    );
-  }
-
   SizedBox _gap() {
     return const SizedBox(
       height: 20,
+      width: 20,
     );
   }
 }
