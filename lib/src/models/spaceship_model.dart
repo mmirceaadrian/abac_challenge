@@ -1,3 +1,4 @@
+/// Model for the Spaceship object
 class Spaceship {
   final int spaceshipId;
   final String name;

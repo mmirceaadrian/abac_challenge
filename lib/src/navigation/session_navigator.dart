@@ -6,9 +6,13 @@ import 'package:abac_challenge/src/screens/main/main_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+/// Navigator for the session
+///
+/// This navigator is used to navigate between the auth and main navigators
 class SessionNavigator extends StatelessWidget {
   const SessionNavigator({Key? key}) : super(key: key);
 
+  /// This method is used to navigate to the auth or main navigator
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SessionCubit, SessionState>(builder: (context, state) {

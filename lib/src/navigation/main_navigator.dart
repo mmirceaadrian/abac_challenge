@@ -7,9 +7,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../screens/main/myappointments_view.dart';
 
+/// Navigator for the main screen
+///
+/// This navigator is used to navigate between the myspaceship and myappointments screens
 class MainNavigator extends StatelessWidget {
   const MainNavigator({Key? key}) : super(key: key);
 
+  /// This method is used to navigate to the myspaceship or myappointments screen
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MainCubit, MainState>(builder: (context, state) {

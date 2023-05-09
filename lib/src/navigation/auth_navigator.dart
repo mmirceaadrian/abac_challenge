@@ -4,9 +4,13 @@ import 'package:abac_challenge/src/screens/auth/register_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+/// Navigator for the auth screen
+///
+/// This navigator is used to navigate between the login and register screens
 class AuthNavigator extends StatelessWidget {
   const AuthNavigator({Key? key}) : super(key: key);
 
+  /// This method is used to navigate to the login screen
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
@@ -20,4 +24,3 @@ class AuthNavigator extends StatelessWidget {
     });
   }
 }
-
