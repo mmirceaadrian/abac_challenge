@@ -5,7 +5,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../config/config.dart';
 import 'package:http/http.dart' as http;
 
+/// Repository for the auth screen
+///
+/// This repository is used to manage the authentication
 class AuthRepo {
+  /// This method is used to attempt the auto login
   Future<String> attemptAutoLogin() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('token');
@@ -17,6 +21,7 @@ class AuthRepo {
     }
   }
 
+  /// This method is used to login
   Future<String> login(String email, String password) async {
     final response = await http.post(
       Uri.parse('${Config.baseUrl}/user/login'),
@@ -38,6 +43,7 @@ class AuthRepo {
     }
   }
 
+  /// This method is used to register
   Future<Map<String, dynamic>> register(String email, String password) async {
     final response = await http.post(
       Uri.parse('${Config.baseUrl}/user/register'),

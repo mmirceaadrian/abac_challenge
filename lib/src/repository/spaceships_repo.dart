@@ -6,7 +6,11 @@ import 'package:http/http.dart' as http;
 
 import '../../config/config.dart';
 
+/// Repository for the spaceships
+///
+/// This repository is used to manage the data of the spaceships
 class SpaceshipsRepo {
+  /// This method is used to get the spaceships from the API
   Future<List<Spaceship>> getSpaceships() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? token = prefs.getString('token');
