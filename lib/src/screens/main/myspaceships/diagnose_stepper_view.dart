@@ -9,6 +9,7 @@ class DiagnoseStepperView extends StatelessWidget {
       currentStep: 0,
       onStepContinue: () {},
       onStepCancel: () {},
+      type: StepperType.horizontal,
       steps: const [
         Step(
           title: Text('Step 1 title'),
