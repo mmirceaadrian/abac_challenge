@@ -3,6 +3,7 @@ import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestep
 import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestepper_event.dart';
 import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestepper_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 Step stepOne() {
@@ -46,34 +47,36 @@ Step stepOne() {
                 children: [
                   TableRow(
                     children: const [
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: TableCell(
+                      TableCell(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
                           child: Text(
                             'Produs',
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: TableCell(
+                      TableCell(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
                           child: Text('Cantitate',
                               style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: TableCell(
+                      TableCell(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
                           child: Text('Pret unitar',
                               style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: TableCell(
-                          child: Text('Total',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
+                      TableCell(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            'Total',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ),
                       SizedBox(),
@@ -83,9 +86,9 @@ Step stepOne() {
                     (component) {
                       return TableRow(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TableCell(
+                          TableCell(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
                               child: Text(
                                 component.name,
                                 style: TextStyle(
@@ -96,9 +99,9 @@ Step stepOne() {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TableCell(
+                          TableCell(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
                               child: Text(
                                 '${component.quantity}',
                                 style: TextStyle(
@@ -109,9 +112,9 @@ Step stepOne() {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TableCell(
+                          TableCell(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
                               child: Text(
                                 '${component.price}',
                                 style: TextStyle(
@@ -122,9 +125,9 @@ Step stepOne() {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TableCell(
+                          TableCell(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
                               child: Text(
                                 '${component.quantityPrice}',
                                 style: TextStyle(
