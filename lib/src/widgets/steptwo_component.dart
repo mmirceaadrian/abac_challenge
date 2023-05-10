@@ -37,36 +37,7 @@ Step buildStepTwo() {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text('8:00'),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text('8:00'),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text('8:00'),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text('8:00'),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text('8:00'),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text('8:00'),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text('8:00'),
-                ),
-              ],
+              children: [],
             ),
           ],
         );
