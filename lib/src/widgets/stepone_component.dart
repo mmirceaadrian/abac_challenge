@@ -3,13 +3,12 @@ import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestep
 import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestepper_event.dart';
 import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestepper_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 Step stepOne() {
   var currentQuantity = 1;
   return Step(
-    label: Text('Creaza deviz'),
+    label: Center(child: Text('Creaza deviz')),
     title: Text(''),
     content: BlocListener<DiagnoseStepperBloc, DiagnoseStepperState>(
       listener: (context, state) {

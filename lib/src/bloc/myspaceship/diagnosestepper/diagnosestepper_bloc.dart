@@ -1,3 +1,4 @@
+import 'package:abac_challenge/src/bloc/main/main_cubit.dart';
 import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestepper_event.dart';
 import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestepper_state.dart';
 import 'package:abac_challenge/src/repository/diagnose_repo.dart';
@@ -6,8 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class DiagnoseStepperBloc
     extends Bloc<DiagnoseStepperEvent, DiagnoseStepperState> {
   final DiagnoseRepo diagnoseRepo;
+  final MainCubit mainCubit;
 
-  DiagnoseStepperBloc({required this.diagnoseRepo})
+  DiagnoseStepperBloc({required this.diagnoseRepo, required this.mainCubit})
       : super(DiagnoseStepperState()) {
     on<DiagnoseStepperEvent>(_onEvent);
   }
@@ -51,6 +53,25 @@ class DiagnoseStepperBloc
         selectedComponents.removeAt(index);
         emit(state.copyWith(selectedComponents: selectedComponents));
       }
+    }
+
+    if (event is DiagnoseStepperNextStep) {
+      if (state.currentStepperIndex == state.maxSteps) {
+        // TODO: Add logic to send data to server and navigate to result screen
+        return;
+      }
+      if (state.selectedComponents.isEmpty) {
+        emit(state.copyWith(error: 'Please add at least one component'));
+        return;
+      }
+      emit(state.copyWith(currentStepperIndex: state.currentStepperIndex + 1));
+    }
+    if (event is DiagnoseStepperPreviousStep) {
+      if (state.currentStepperIndex == 0) {
+        mainCubit.showSpaceships();
+        return;
+      }
+      emit(state.copyWith(currentStepperIndex: state.currentStepperIndex - 1));
     }
   }
 }

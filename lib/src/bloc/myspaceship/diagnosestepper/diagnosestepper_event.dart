@@ -21,3 +21,7 @@ class DiagnoseStepperRemoveComponent extends DiagnoseStepperEvent {
 
   DiagnoseStepperRemoveComponent({required this.spaceshipComponent});
 }
+
+class DiagnoseStepperNextStep extends DiagnoseStepperEvent {}
+
+class DiagnoseStepperPreviousStep extends DiagnoseStepperEvent {}
