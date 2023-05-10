@@ -4,6 +4,7 @@ import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestep
 import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestepper_state.dart';
 import 'package:abac_challenge/src/repository/diagnose_repo.dart';
 import 'package:abac_challenge/src/widgets/stepone_component.dart';
+import 'package:abac_challenge/src/widgets/steptwo_component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,8 +25,8 @@ class DiagnoseStepperView extends StatelessWidget {
               currentStep: state.currentStepperIndex,
               type: StepperType.horizontal,
               steps: [
-                stepOne(),
-                stepTwo(),
+                buildStepOne(),
+                buildStepTwo(),
                 stepThree(),
               ],
               controlsBuilder: (context, controlsDetails) {
@@ -39,14 +40,6 @@ class DiagnoseStepperView extends StatelessWidget {
           ]);
         },
       ),
-    );
-  }
-
-  Step stepTwo() {
-    return Step(
-      title: Center(child: Text('Step 2 title')),
-      content: Text('Content for Step 2'),
-      isActive: true,
     );
   }
 

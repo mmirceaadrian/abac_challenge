@@ -5,7 +5,7 @@ import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestep
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-Step stepOne() {
+Step buildStepOne() {
   var currentQuantity = 1;
   return Step(
     label: Center(child: Text('Creaza deviz')),
