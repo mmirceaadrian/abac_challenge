@@ -2,6 +2,7 @@ import 'package:abac_challenge/constants.dart';
 import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestepper_bloc.dart';
 import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestepper_event.dart';
 import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestepper_state.dart';
+import 'package:abac_challenge/src/models/spaceship_component_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -44,114 +45,10 @@ Step buildStepOne() {
                   ),
                 ),
                 children: [
-                  TableRow(
-                    children: const [
-                      TableCell(
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            'Produs',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      TableCell(
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text('Cantitate',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                        ),
-                      ),
-                      TableCell(
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text('Pret unitar',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                        ),
-                      ),
-                      TableCell(
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            'Total',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      SizedBox(),
-                    ],
-                  ),
+                  _buildTableHeader(),
                   ...state.selectedComponents.map(
                     (component) {
-                      return TableRow(
-                        children: [
-                          TableCell(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                component.name,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ),
-                          TableCell(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                '${component.quantity}',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ),
-                          TableCell(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                '${component.price}',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ),
-                          TableCell(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                '${component.quantityPrice}',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ),
-                          TableCell(
-                            child: IconButton(
-                              onPressed: () {
-                                context.read<DiagnoseStepperBloc>().add(
-                                      DiagnoseStepperRemoveComponent(
-                                        spaceshipComponent: component,
-                                      ),
-                                    );
-                              },
-                              icon: Icon(Icons.delete),
-                              splashRadius: 15,
-                            ),
-                          ),
-                        ],
-                      );
+                      return _getRowForComponent(component, context);
                     },
                   ),
                 ],
@@ -243,6 +140,119 @@ Step buildStepOne() {
       ),
     ),
     isActive: true,
+  );
+}
+
+TableRow _buildTableHeader() {
+  return TableRow(
+    children: const [
+      TableCell(
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text(
+            'Produs',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+      TableCell(
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child:
+              Text('Cantitate', style: TextStyle(fontWeight: FontWeight.bold)),
+        ),
+      ),
+      TableCell(
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text('Pret unitar',
+              style: TextStyle(fontWeight: FontWeight.bold)),
+        ),
+      ),
+      TableCell(
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text(
+            'Total',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+      SizedBox(),
+    ],
+  );
+}
+
+TableRow _getRowForComponent(
+    SpaceshipComponent component, BuildContext context) {
+  return TableRow(
+    children: [
+      TableCell(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            component.name,
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w400,
+              fontSize: 16,
+            ),
+          ),
+        ),
+      ),
+      TableCell(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            '${component.quantity}',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w400,
+              fontSize: 16,
+            ),
+          ),
+        ),
+      ),
+      TableCell(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            '${component.price}',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w400,
+              fontSize: 16,
+            ),
+          ),
+        ),
+      ),
+      TableCell(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            '${component.quantityPrice}',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w400,
+              fontSize: 16,
+            ),
+          ),
+        ),
+      ),
+      TableCell(
+        child: IconButton(
+          onPressed: () {
+            context.read<DiagnoseStepperBloc>().add(
+                  DiagnoseStepperRemoveComponent(
+                    spaceshipComponent: component,
+                  ),
+                );
+          },
+          icon: Icon(Icons.delete),
+          splashRadius: 15,
+        ),
+      ),
+    ],
   );
 }
 

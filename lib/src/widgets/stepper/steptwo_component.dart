@@ -13,7 +13,7 @@ Step buildStepTwo() {
     isActive: true,
     content: BlocBuilder<DiagnoseStepperBloc, DiagnoseStepperState>(
       builder: (context, state) {
-        return CalendarView();
+        return CalendarView(startHour: 8, endHour: 16);
       },
     ),
   );

@@ -39,6 +39,7 @@ dependencies:
   http: ^0.13.5
   google_nav_bar: ^5.0.6
   image_card: ^0.0.4
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

@@ -2,7 +2,10 @@ import 'package:abac_challenge/src/widgets/calendar/day_widget.dart';
 import 'package:flutter/material.dart';
 
 class CalendarView extends StatefulWidget {
-  const CalendarView({super.key});
+  final int startHour;
+  final int endHour;
+  const CalendarView({super.key, required this.startHour, required this.endHour});
+  
 
   @override
   CalendarViewState createState() => CalendarViewState();
@@ -21,7 +24,6 @@ class CalendarViewState extends State<CalendarView> {
         color: Colors.grey[200],
       ),
       child: Column(children: [
-        // 1 row with the next, previeus buttons and curent month
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
@@ -132,6 +134,6 @@ class CalendarViewState extends State<CalendarView> {
 
   // return a collum for each day of the week
   Widget _getDay(DateTime day) {
-    return DayWidget(dateTime: day);
+    return DayWidget(dateTime: day, startHour: widget.startHour, maxHours: widget.endHour - widget.startHour);
   }
 }

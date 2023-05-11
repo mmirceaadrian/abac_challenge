@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 
 class DayWidget extends StatefulWidget {
   final DateTime dateTime;
+  final int maxHours;
+  final int startHour;
 
-  const DayWidget({Key? key, required this.dateTime}) : super(key: key);
+  const DayWidget(
+      {Key? key,
+      required this.dateTime,
+      required this.startHour,
+      required this.maxHours})
+      : super(key: key);
 
   @override
   DayWidgetState createState() => DayWidgetState();
@@ -32,15 +39,23 @@ class DayWidgetState extends State<DayWidget> {
   List<Widget> _getAppointments(DateTime day) {
     List<Widget> appointments = [];
 
-    const startHour = 8;
-    for (var i = 0; i < 9; i++) {
+    var startHour = DateTime(2021, 1, 1, widget.startHour);
+    for (var i = 0; i <= widget.maxHours; i++) {
       appointments.add(Padding(
         padding: const EdgeInsets.all(8.0),
         child: TextButton(
+          style: TextButton.styleFrom(
+            backgroundColor: Colors.white,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(4)),
+            ),
+          ),
           onPressed: () {},
-          child: Text('${startHour + i}:00'),
+          child: Text('${startHour.hour}:00',
+              style: TextStyle(fontSize: 16, color: Colors.black)),
         ),
       ));
+      startHour = startHour.add(Duration(hours: 1));
     }
 
     return appointments;
