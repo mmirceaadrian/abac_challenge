@@ -3,8 +3,8 @@ import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestep
 import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestepper_event.dart';
 import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestepper_state.dart';
 import 'package:abac_challenge/src/repository/diagnose_repo.dart';
-import 'package:abac_challenge/src/widgets/stepone_component.dart';
-import 'package:abac_challenge/src/widgets/steptwo_component.dart';
+import 'package:abac_challenge/src/widgets/stepper/stepone_component.dart';
+import 'package:abac_challenge/src/widgets/stepper/steptwo_component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
