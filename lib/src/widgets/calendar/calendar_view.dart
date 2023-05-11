@@ -1,11 +1,24 @@
+import 'package:abac_challenge/src/models/appointment_cell.dart';
 import 'package:abac_challenge/src/widgets/calendar/day_widget.dart';
 import 'package:flutter/material.dart';
 
 class CalendarView extends StatefulWidget {
   final int startHour;
   final int endHour;
-  const CalendarView({super.key, required this.startHour, required this.endHour});
-  
+  final List<AppointmentCell> appointmentCells;
+  final Function(DateTime, DateTime) onWeekChange;
+  final Function(DateTime) onSelectDate;
+  final DateTime? selectedDate;
+
+  const CalendarView({
+    super.key,
+    required this.startHour,
+    required this.endHour,
+    required this.appointmentCells,
+    required this.onWeekChange,
+    required this.onSelectDate,
+    this.selectedDate,
+  });
 
   @override
   CalendarViewState createState() => CalendarViewState();
@@ -69,6 +82,7 @@ class CalendarViewState extends State<CalendarView> {
   void _nextWeek() {
     setState(() {
       firstDay = firstDay.add(Duration(days: dayCount));
+      widget.onWeekChange(firstDay, firstDay.add(Duration(days: dayCount)));
     });
   }
 
@@ -78,6 +92,7 @@ class CalendarViewState extends State<CalendarView> {
 
     setState(() {
       firstDay = firstDay.subtract(Duration(days: dayCount));
+      widget.onWeekChange(firstDay, firstDay.add(Duration(days: dayCount)));
     });
   }
 
@@ -125,6 +140,16 @@ class CalendarViewState extends State<CalendarView> {
 
   // return a collum for each day of the week
   List<Widget> _getWeek(DateTime firstDay) {
+    if (MediaQuery.of(context).size.width < 600) {
+      setState(() {
+        dayCount = 5;
+      });
+    } else {
+      setState(() {
+        dayCount = 7;
+      });
+    }
+
     List<Widget> week = [];
     for (var i = 0; i < dayCount; i++) {
       week.add(_getDay(firstDay.add(Duration(days: i))));
@@ -134,6 +159,13 @@ class CalendarViewState extends State<CalendarView> {
 
   // return a collum for each day of the week
   Widget _getDay(DateTime day) {
-    return DayWidget(dateTime: day, startHour: widget.startHour, maxHours: widget.endHour - widget.startHour);
+    return DayWidget(
+      dateTime: day,
+      startHour: widget.startHour,
+      maxHours: widget.endHour - widget.startHour,
+      appointmentCells: widget.appointmentCells,
+      onSelectDate: widget.onSelectDate,
+      selectedDate: widget.selectedDate,
+    );
   }
 }

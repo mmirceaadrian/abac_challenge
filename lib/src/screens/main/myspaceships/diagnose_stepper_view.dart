@@ -17,28 +17,45 @@ class DiagnoseStepperView extends StatelessWidget {
       create: (context) => DiagnoseStepperBloc(
         diagnoseRepo: context.read<DiagnoseRepo>(),
         mainCubit: context.read<MainCubit>(),
-      ),
-      child: BlocBuilder<DiagnoseStepperBloc, DiagnoseStepperState>(
-        builder: (context, state) {
-          return Stack(children: <Widget>[
-            Stepper(
-              currentStep: state.currentStepperIndex,
-              type: StepperType.horizontal,
-              steps: [
-                buildStepOne(),
-                buildStepTwo(),
-                stepThree(),
-              ],
-              controlsBuilder: (context, controlsDetails) {
-                return Container();
-              },
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: _bottomBar(state.returnButtonText, state.nextButtonText),
-            ),
-          ]);
+      )..add(
+          DiagnoseStepperGetAppointmentCells(
+            startDate: DateTime.now(),
+            endDate: DateTime.now().add(Duration(days: 7)),
+          ),
+        ),
+      child: BlocListener<DiagnoseStepperBloc, DiagnoseStepperState>(
+        listener: (context, state) {
+          if (state.error != '') {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.error!),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
         },
+        child: BlocBuilder<DiagnoseStepperBloc, DiagnoseStepperState>(
+          builder: (context, state) {
+            return Stack(children: <Widget>[
+              Stepper(
+                currentStep: state.currentStepperIndex,
+                type: StepperType.horizontal,
+                steps: [
+                  buildStepOne(),
+                  buildStepTwo(),
+                  stepThree(),
+                ],
+                controlsBuilder: (context, controlsDetails) {
+                  return Container();
+                },
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: _bottomBar(state.returnButtonText, state.nextButtonText),
+              ),
+            ]);
+          },
+        ),
       ),
     );
   }

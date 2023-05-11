@@ -1,16 +1,24 @@
+import 'package:abac_challenge/constants.dart';
+import 'package:abac_challenge/src/models/appointment_cell.dart';
 import 'package:flutter/material.dart';
 
 class DayWidget extends StatefulWidget {
   final DateTime dateTime;
   final int maxHours;
   final int startHour;
+  final List<AppointmentCell> appointmentCells;
+  final Function(DateTime) onSelectDate;
+  final DateTime? selectedDate;
 
-  const DayWidget(
-      {Key? key,
-      required this.dateTime,
-      required this.startHour,
-      required this.maxHours})
-      : super(key: key);
+  const DayWidget({
+    Key? key,
+    required this.dateTime,
+    required this.startHour,
+    required this.maxHours,
+    required this.appointmentCells,
+    required this.onSelectDate,
+    this.selectedDate,
+  }) : super(key: key);
 
   @override
   DayWidgetState createState() => DayWidgetState();
@@ -19,43 +27,79 @@ class DayWidget extends StatefulWidget {
 class DayWidgetState extends State<DayWidget> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(_getDayName(widget.dateTime.weekday),
-            style: TextStyle(fontSize: 16)),
-        Text(widget.dateTime.day.toString(),
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            )),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: _getAppointments(widget.dateTime),
-        ),
-      ],
+    bool currentDay = (widget.dateTime.day == DateTime.now().day) &&
+        (widget.dateTime.month == DateTime.now().month) &&
+        (widget.dateTime.year == DateTime.now().year);
+    return Container(
+      decoration: currentDay
+          ? BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: kPrimaryLightColor.withOpacity(0.1),
+            )
+          : null,
+      child: Column(
+        children: [
+          Text(_getDayName(widget.dateTime.weekday),
+              style: TextStyle(fontSize: 16)),
+          Text(widget.dateTime.day.toString(),
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              )),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: _getAppointments(widget.dateTime),
+          ),
+        ],
+      ),
     );
   }
 
   List<Widget> _getAppointments(DateTime day) {
     List<Widget> appointments = [];
-
-    var startHour = DateTime(2021, 1, 1, widget.startHour);
+    var startHour = DateTime(day.year, day.month, day.day, widget.startHour);
     for (var i = 0; i <= widget.maxHours; i++) {
-      appointments.add(Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: TextButton(
-          style: TextButton.styleFrom(
-            backgroundColor: Colors.white,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(4)),
+      bool isTaken = widget.appointmentCells
+          .where((element) =>
+              element.date.year == day.year &&
+              element.date.month == day.month &&
+              element.date.day == day.day &&
+              element.date.hour == startHour.add(Duration(hours: i)).hour)
+          .isNotEmpty;
+
+      bool isSelected = widget.selectedDate != null &&
+          widget.selectedDate?.compareTo(startHour.add(Duration(hours: i))) ==
+              0;
+
+      appointments.add(
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: isTaken
+                  ? Colors.black12
+                  : isSelected
+                      ? Colors.green.shade300
+                      : Colors.white,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(4)),
+              ),
             ),
+            onPressed: isTaken
+                ? null
+                : () {
+                    print(
+                        'Pressed ${startHour.add(Duration(hours: i)).hour}:00');
+                    widget.onSelectDate(startHour.add(Duration(hours: i)));
+                  },
+            child: Text('${startHour.add(Duration(hours: i)).hour}:00',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: isTaken ? Colors.black26 : Colors.black,
+                )),
           ),
-          onPressed: () {},
-          child: Text('${startHour.hour}:00',
-              style: TextStyle(fontSize: 16, color: Colors.black)),
         ),
-      ));
-      startHour = startHour.add(Duration(hours: 1));
+      );
     }
 
     return appointments;

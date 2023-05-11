@@ -64,14 +64,34 @@ class DiagnoseStepperBloc
         emit(state.copyWith(error: 'Please add at least one component'));
         return;
       }
+      if (state.currentStepperIndex == 1 && state.selectedDate == null) {
+        emit(state.copyWith(error: 'Please select a valid date'));
+        return;
+      }
       emit(state.copyWith(currentStepperIndex: state.currentStepperIndex + 1));
     }
+
     if (event is DiagnoseStepperPreviousStep) {
       if (state.currentStepperIndex == 0) {
         mainCubit.showSpaceships();
         return;
       }
       emit(state.copyWith(currentStepperIndex: state.currentStepperIndex - 1));
+    }
+
+    if (event is DiagnoseStepperGetAppointmentCells) {
+      try {
+        var cells = await diagnoseRepo.getAppointmentCells(
+            event.startDate, event.endDate);
+        emit(state.copyWith(appointmentCells: cells));
+      } catch (e) {
+        emit(state.copyWith(appointmentCells: []));
+      }
+    }
+
+    if (event is DiagnoseStepperSelectDate) {
+      print(event.date);
+      emit(state.copyWith(selectedDate: event.date, error: ''));
     }
   }
 }

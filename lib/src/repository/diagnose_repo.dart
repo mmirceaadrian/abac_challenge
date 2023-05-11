@@ -33,51 +33,42 @@ class DiagnoseRepo {
     }
   }
 
-  Future<List<AppointmentCell>> getAppointmentCell(DateTime startDate) {
+  Future<List<AppointmentCell>> getAppointmentCells(
+      DateTime startDate, DateTime endDate) {
     var list = <AppointmentCell>[];
 
     list.add(
       AppointmentCell(
         appointmentId: 1,
-        date: DateTime(2023, 5, 10),
-        time: '8:00',
-        isFree: true,
+        date: DateTime(2023, 5, 12, 9, 0),
       ),
     );
 
     list.add(
       AppointmentCell(
         appointmentId: 2,
-        date: DateTime(2023, 5, 10),
-        time: '9:00',
-        isFree: true,
+        date: DateTime(2023, 5, 15, 9, 0),
       ),
     );
 
     list.add(
       AppointmentCell(
         appointmentId: 3,
-        date: DateTime(2023, 5, 10),
-        time: '10:00',
-        isFree: false,
+        date: DateTime(2023, 5, 12, 10, 0),
       ),
     );
 
     list.add(
       AppointmentCell(
         appointmentId: 4,
-        date: DateTime(2023, 5, 10),
-        time: '11:00',
-        isFree: true,
+        date: DateTime(2023, 5, 11, 11, 0),
       ),
     );
 
     list.add(
       AppointmentCell(
         appointmentId: 5,
-        date: DateTime(2023, 5, 10),
-        time: '12:00',
-        isFree: true,
+        date: DateTime(2023, 5, 11, 12, 0),
       ),
     );
 

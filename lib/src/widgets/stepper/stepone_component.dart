@@ -11,133 +11,121 @@ Step buildStepOne() {
   return Step(
     label: Center(child: Text('Creaza deviz')),
     title: Text(''),
-    content: BlocListener<DiagnoseStepperBloc, DiagnoseStepperState>(
-      listener: (context, state) {
-        if (state.error != '') {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.error!),
-              backgroundColor: Colors.red,
+    content: BlocBuilder<DiagnoseStepperBloc, DiagnoseStepperState>(
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Task 1',
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
-          );
-        }
-      },
-      child: BlocBuilder<DiagnoseStepperBloc, DiagnoseStepperState>(
-        builder: (context, state) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Task 1',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              _gap(),
-              // list of installed components
-              Table(
-                border: TableBorder(
-                  horizontalInside: BorderSide(
-                    color: Colors.grey,
-                    width: 2,
-                  ),
-                  bottom: BorderSide(
-                    color: Colors.grey,
-                    width: 2,
-                  ),
+            _gap(),
+            // list of installed components
+            Table(
+              border: TableBorder(
+                horizontalInside: BorderSide(
+                  color: Colors.grey,
+                  width: 2,
                 ),
-                children: [
-                  _buildTableHeader(),
-                  ...state.selectedComponents.map(
-                    (component) {
-                      return _getRowForComponent(component, context);
+                bottom: BorderSide(
+                  color: Colors.grey,
+                  width: 2,
+                ),
+              ),
+              children: [
+                _buildTableHeader(),
+                ...state.selectedComponents.map(
+                  (component) {
+                    return _getRowForComponent(component, context);
+                  },
+                ),
+              ],
+            ),
+            _gap(),
+            // search component
+            Row(
+              children: [
+                // search bar field
+                Container(
+                  constraints: BoxConstraints(maxWidth: 300),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Cauta componenta',
+                      icon: Icon(Icons.search),
+                    ),
+                    onChanged: (value) {
+                      context
+                          .read<DiagnoseStepperBloc>()
+                          .add(DiagnoseStepperSearch(query: value));
                     },
                   ),
-                ],
-              ),
-              _gap(),
-              // search component
-              Row(
-                children: [
-                  // search bar field
-                  Container(
-                    constraints: BoxConstraints(maxWidth: 300),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        labelText: 'Cauta componenta',
-                        icon: Icon(Icons.search),
-                      ),
-                      onChanged: (value) {
-                        context
-                            .read<DiagnoseStepperBloc>()
-                            .add(DiagnoseStepperSearch(query: value));
-                      },
-                    ),
-                  ),
-                  _gap(),
-                  // quantity field
-                  Container(
-                    constraints: BoxConstraints(maxWidth: 70),
-                    child: TextFormField(
-                      textAlign: TextAlign.center,
-                      keyboardType: TextInputType.number,
-                      initialValue: currentQuantity.toString(),
-                      decoration: InputDecoration(
-                        labelText: 'Cantitate',
-                      ),
-                      onChanged: (value) {
-                        try {
-                          currentQuantity = int.parse(value);
-                        } catch (e) {
-                          currentQuantity = 1;
-                        }
-                      },
-                    ),
-                  )
-                ],
-              ),
-              _gap(),
-              // list of searched components
-              if (state.searchedComponents.isNotEmpty)
+                ),
+                _gap(),
+                // quantity field
                 Container(
-                  constraints: BoxConstraints(maxWidth: 350),
-                  padding: EdgeInsets.all(10),
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    // this paginate should be done in the backend side
-                    // now, we are just limiting the search to 5 results
-                    itemCount: state.searchedComponents.length > 5
-                        ? 5
-                        : state.searchedComponents.length,
-                    itemBuilder: (context, index) {
-                      var component = state.searchedComponents[index];
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ListTile(
-                          title: Text(component.name),
-                          trailing: CircleAvatar(
-                            radius: 30,
-                            backgroundColor: kPrimaryColor,
-                            child: IconButton(
-                              onPressed: () {
-                                context.read<DiagnoseStepperBloc>().add(
-                                      DiagnoseStepperAddComponent(
-                                        spaceshipComponent: component,
-                                        quantity: currentQuantity,
-                                      ),
-                                    );
-                              },
-                              icon: Icon(Icons.add),
-                            ),
+                  constraints: BoxConstraints(maxWidth: 70),
+                  child: TextFormField(
+                    textAlign: TextAlign.center,
+                    keyboardType: TextInputType.number,
+                    initialValue: currentQuantity.toString(),
+                    decoration: InputDecoration(
+                      labelText: 'Cantitate',
+                    ),
+                    onChanged: (value) {
+                      try {
+                        currentQuantity = int.parse(value);
+                      } catch (e) {
+                        currentQuantity = 1;
+                      }
+                    },
+                  ),
+                )
+              ],
+            ),
+            _gap(),
+            // list of searched components
+            if (state.searchedComponents.isNotEmpty)
+              Container(
+                constraints: BoxConstraints(maxWidth: 350),
+                padding: EdgeInsets.all(10),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  // this paginate should be done in the backend side
+                  // now, we are just limiting the search to 5 results
+                  itemCount: state.searchedComponents.length > 5
+                      ? 5
+                      : state.searchedComponents.length,
+                  itemBuilder: (context, index) {
+                    var component = state.searchedComponents[index];
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListTile(
+                        title: Text(component.name),
+                        trailing: CircleAvatar(
+                          radius: 30,
+                          backgroundColor: kPrimaryColor,
+                          child: IconButton(
+                            onPressed: () {
+                              context.read<DiagnoseStepperBloc>().add(
+                                    DiagnoseStepperAddComponent(
+                                      spaceshipComponent: component,
+                                      quantity: currentQuantity,
+                                    ),
+                                  );
+                            },
+                            icon: Icon(Icons.add),
                           ),
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
-              if (state.searchedComponents.isEmpty) Text('Niciun rezultat'),
-            ],
-          );
-        },
-      ),
+              ),
+            if (state.searchedComponents.isEmpty) Text('Niciun rezultat'),
+          ],
+        );
+      },
     ),
     isActive: true,
   );

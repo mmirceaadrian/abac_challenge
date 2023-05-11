@@ -25,3 +25,17 @@ class DiagnoseStepperRemoveComponent extends DiagnoseStepperEvent {
 class DiagnoseStepperNextStep extends DiagnoseStepperEvent {}
 
 class DiagnoseStepperPreviousStep extends DiagnoseStepperEvent {}
+
+class DiagnoseStepperGetAppointmentCells extends DiagnoseStepperEvent {
+  final DateTime startDate;
+  final DateTime endDate;
+
+  DiagnoseStepperGetAppointmentCells(
+      {required this.startDate, required this.endDate});
+}
+
+class DiagnoseStepperSelectDate extends DiagnoseStepperEvent {
+  final DateTime date;
+
+  DiagnoseStepperSelectDate({required this.date});
+}
