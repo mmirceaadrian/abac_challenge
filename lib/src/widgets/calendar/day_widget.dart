@@ -14,8 +14,13 @@ class DayWidgetState extends State<DayWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(_getDayName(widget.dateTime.weekday)),
-        Text(widget.dateTime.day.toString()),
+        Text(_getDayName(widget.dateTime.weekday),
+            style: TextStyle(fontSize: 16)),
+        Text(widget.dateTime.day.toString(),
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            )),
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: _getAppointments(widget.dateTime),

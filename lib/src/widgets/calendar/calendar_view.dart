@@ -16,24 +16,39 @@ class CalendarViewState extends State<CalendarView> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.grey[200],
+      ),
       child: Column(children: [
         // 1 row with the next, previeus buttons and curent month
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(
-                  icon: const Icon(Icons.arrow_back),
-                  tooltip: 'Previous week',
-                  onPressed: () => _previousWeek()),
-              // curent month in letters
-              Text(_getMonthName(), style: TextStyle(fontSize: 20)),
-              IconButton(
-                  icon: const Icon(Icons.arrow_forward),
-                  tooltip: 'Next week',
-                  onPressed: () => _nextWeek()),
-            ],
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.white70,
+            border: Border.all(color: Colors.grey, width: 2),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                    splashRadius: 20,
+                    icon: const Icon(Icons.arrow_back),
+                    tooltip: 'Previous week',
+                    onPressed: () => _previousWeek()),
+                // curent month in letters
+                Text(_getMonthName(),
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                IconButton(
+                    splashRadius: 20,
+                    icon: const Icon(Icons.arrow_forward),
+                    tooltip: 'Next week',
+                    onPressed: () => _nextWeek()),
+              ],
+            ),
           ),
         ),
 
