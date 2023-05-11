@@ -4,6 +4,7 @@ import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestep
 import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestepper_state.dart';
 import 'package:abac_challenge/src/repository/diagnose_repo.dart';
 import 'package:abac_challenge/src/widgets/stepper/stepone_component.dart';
+import 'package:abac_challenge/src/widgets/stepper/stepthree_component.dart';
 import 'package:abac_challenge/src/widgets/stepper/steptwo_component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,7 +44,7 @@ class DiagnoseStepperView extends StatelessWidget {
                 steps: [
                   buildStepOne(),
                   buildStepTwo(),
-                  stepThree(),
+                  buildStepThree(),
                 ],
                 controlsBuilder: (context, controlsDetails) {
                   return Container();
@@ -57,14 +58,6 @@ class DiagnoseStepperView extends StatelessWidget {
           },
         ),
       ),
-    );
-  }
-
-  Step stepThree() {
-    return Step(
-      title: Text('Step 3 title'),
-      content: Text('Content for Step 3'),
-      isActive: false,
     );
   }
 
