@@ -1,4 +1,5 @@
 import 'package:abac_challenge/src/bloc/main/main_state.dart';
+import 'package:abac_challenge/src/models/spaceship_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Cubit for the main screen
@@ -9,7 +10,8 @@ class MainCubit extends Cubit<MainState> {
 
   void showSpaceships() => emit(SpaceshipsState());
   void showAppointments() => emit(AppointmentsState());
-  void showDiagnoseStespper() => emit(DiagnoseState());
+  void showDiagnoseStespper(Spaceship spaceship) =>
+      emit(DiagnoseState(spaceship));
 
   /// This method is used to show the screen by index
   ///

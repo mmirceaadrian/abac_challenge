@@ -1,16 +1,17 @@
 import 'package:abac_challenge/constants.dart';
 import 'package:abac_challenge/src/bloc/main/main_cubit.dart';
 import 'package:abac_challenge/src/bloc/main/main_state.dart';
+import 'package:abac_challenge/src/models/spaceship_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// This method is used to build a card
 ///
 /// The card is used to display information about a spaceship
-Card buildCard(var title, var subtitle, var cardImageUrl) {
-  var heading = title;
-  var subheading = subtitle;
-  var cardImage = NetworkImage(cardImageUrl);
+Card spaceshipCard(Spaceship spaceship) {
+  var heading = '${spaceship.name} ${spaceship.model}';
+  var subheading = spaceship.year.toString();
+  var cardImage = NetworkImage(spaceship.image);
   var supportingText =
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
   return Card(
@@ -54,7 +55,7 @@ Card buildCard(var title, var subtitle, var cardImageUrl) {
                           fontWeight: FontWeight.bold),
                     ),
                     onPressed: () {
-                      context.read<MainCubit>().showDiagnoseStespper();
+                      context.read<MainCubit>().showDiagnoseStespper(spaceship);
                     },
                   );
                 },

@@ -1,7 +1,9 @@
 import 'package:abac_challenge/src/models/appointment_cell.dart';
 import 'package:abac_challenge/src/models/spaceship_component_model.dart';
+import 'package:abac_challenge/src/models/spaceship_model.dart';
 
 class DiagnoseStepperState {
+  Spaceship? selectedSpaceship;
   List<SpaceshipComponent> selectedComponents;
   List<SpaceshipComponent> searchedComponents;
 
@@ -17,7 +19,8 @@ class DiagnoseStepperState {
   String? error;
 
   DiagnoseStepperState(
-      {this.selectedComponents = const [],
+      {this.selectedSpaceship,
+      this.selectedComponents = const [],
       this.searchedComponents = const [],
       this.appointmentCells = const [],
       this.error = '',
@@ -27,6 +30,7 @@ class DiagnoseStepperState {
       this.selectedDate});
 
   DiagnoseStepperState copyWith({
+    Spaceship? selectedSpaceship,
     List<SpaceshipComponent>? selectedComponents,
     List<SpaceshipComponent>? searchedComponents,
     List<AppointmentCell>? appointmentCells,
@@ -37,6 +41,7 @@ class DiagnoseStepperState {
     DateTime? selectedDate,
   }) {
     return DiagnoseStepperState(
+        selectedSpaceship: selectedSpaceship ?? this.selectedSpaceship,
         selectedComponents: selectedComponents ?? this.selectedComponents,
         searchedComponents: searchedComponents ?? this.searchedComponents,
         appointmentCells: appointmentCells ?? this.appointmentCells,

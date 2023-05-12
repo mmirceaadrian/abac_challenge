@@ -16,6 +16,9 @@ class DiagnoseStepperBloc
 
   Future<void> _onEvent(
       DiagnoseStepperEvent event, Emitter<DiagnoseStepperState> emit) async {
+    if (event is DiagnoseStepperInitialize) {
+      emit(state.copyWith(selectedSpaceship: event.spaceship));
+    }
     if (event is DiagnoseStepperSearch) {
       try {
         if (event.query.isEmpty) {

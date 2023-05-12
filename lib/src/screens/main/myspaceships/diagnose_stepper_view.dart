@@ -2,6 +2,7 @@ import 'package:abac_challenge/src/bloc/main/main_cubit.dart';
 import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestepper_bloc.dart';
 import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestepper_event.dart';
 import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestepper_state.dart';
+import 'package:abac_challenge/src/models/spaceship_model.dart';
 import 'package:abac_challenge/src/repository/diagnose_repo.dart';
 import 'package:abac_challenge/src/widgets/stepper/stepone_component.dart';
 import 'package:abac_challenge/src/widgets/stepper/stepthree_component.dart';
@@ -10,7 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DiagnoseStepperView extends StatelessWidget {
-  const DiagnoseStepperView({Key? key}) : super(key: key);
+  final Spaceship spaceship;
+  const DiagnoseStepperView({Key? key, required this.spaceship})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +21,15 @@ class DiagnoseStepperView extends StatelessWidget {
       create: (context) => DiagnoseStepperBloc(
         diagnoseRepo: context.read<DiagnoseRepo>(),
         mainCubit: context.read<MainCubit>(),
-      )..add(
+      )
+        ..add(
           DiagnoseStepperGetAppointmentCells(
             startDate: DateTime.now(),
             endDate: DateTime.now().add(Duration(days: 7)),
           ),
+        )
+        ..add(
+          DiagnoseStepperInitialize(spaceship: spaceship),
         ),
       child: BlocListener<DiagnoseStepperBloc, DiagnoseStepperState>(
         listener: (context, state) {

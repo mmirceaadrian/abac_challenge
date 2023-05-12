@@ -1,3 +1,5 @@
+import 'package:abac_challenge/src/models/spaceship_model.dart';
+
 abstract class MainState {
   final int index;
   const MainState(this.index);
@@ -12,5 +14,8 @@ class AppointmentsState extends MainState {
 }
 
 class DiagnoseState extends MainState {
-  const DiagnoseState() : super(0);
+  final Spaceship spaceship;
+  const DiagnoseState(
+    this.spaceship,
+  ) : super(0);
 }

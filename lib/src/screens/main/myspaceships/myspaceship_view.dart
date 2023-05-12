@@ -44,8 +44,7 @@ class SpaceshipView extends StatelessWidget {
                       itemCount: state.spaceships.length,
                       itemBuilder: (context, index) {
                         var spaceship = state.spaceships[index];
-                        return buildCard("${spaceship.name}-${spaceship.model}",
-                            "${spaceship.year}", spaceship.image);
+                        return spaceshipCard(spaceship);
                       },
                     ),
                   )
@@ -56,8 +55,7 @@ class SpaceshipView extends StatelessWidget {
                       itemCount: state.spaceships.length,
                       itemBuilder: (context, index) {
                         var spaceship = state.spaceships[index];
-                        return buildCard("${spaceship.name}-${spaceship.model}",
-                            "${spaceship.year}", spaceship.image);
+                        return spaceshipCard(spaceship);
                       },
                     ),
                   );

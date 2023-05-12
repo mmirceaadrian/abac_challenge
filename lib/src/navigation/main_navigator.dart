@@ -36,7 +36,9 @@ class MainNavigator extends StatelessWidget {
                 ),
                 if (state is DiagnoseState)
                   MaterialPage(
-                    child: DiagnoseStepperView(),
+                    child: DiagnoseStepperView(
+                      spaceship: state.spaceship,
+                    ),
                   )
               ],
               if (state is AppointmentsState)

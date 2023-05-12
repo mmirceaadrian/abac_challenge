@@ -1,4 +1,5 @@
 import 'package:abac_challenge/src/models/spaceship_component_model.dart';
+import 'package:abac_challenge/src/models/spaceship_model.dart';
 
 abstract class DiagnoseStepperEvent {}
 
@@ -38,4 +39,10 @@ class DiagnoseStepperSelectDate extends DiagnoseStepperEvent {
   final DateTime date;
 
   DiagnoseStepperSelectDate({required this.date});
+}
+
+class DiagnoseStepperInitialize extends DiagnoseStepperEvent {
+  final Spaceship spaceship;
+
+  DiagnoseStepperInitialize({required this.spaceship});
 }

@@ -60,15 +60,22 @@ class DiagnoseRepo {
 
     list.add(
       AppointmentCell(
-        appointmentId: 4,
-        date: DateTime(2023, 5, 11, 11, 0),
+        appointmentId: 6,
+        date: DateTime(2023, 5, 12, 13, 0),
       ),
     );
 
     list.add(
       AppointmentCell(
-        appointmentId: 5,
-        date: DateTime(2023, 5, 11, 12, 0),
+        appointmentId: 7,
+        date: DateTime(2023, 5, 16, 14, 0),
+      ),
+    );
+
+    list.add(
+      AppointmentCell(
+        appointmentId: 8,
+        date: DateTime(2023, 5, 17, 15, 0),
       ),
     );
 
