@@ -88,8 +88,6 @@ class DayWidgetState extends State<DayWidget> {
             onPressed: isTaken
                 ? null
                 : () {
-                    print(
-                        'Pressed ${startHour.add(Duration(hours: i)).hour}:00');
                     widget.onSelectDate(startHour.add(Duration(hours: i)));
                   },
             child: Text('${startHour.add(Duration(hours: i)).hour}:00',

@@ -90,7 +90,6 @@ class DiagnoseStepperBloc
     }
 
     if (event is DiagnoseStepperSelectDate) {
-      print(event.date);
       emit(state.copyWith(selectedDate: event.date, error: ''));
     }
   }
