@@ -48,7 +48,7 @@ Step buildStepOne() {
               children: [
                 // search bar field
                 Container(
-                  constraints: BoxConstraints(maxWidth: 300),
+                  constraints: BoxConstraints(maxWidth: 200),
                   child: TextFormField(
                     decoration: InputDecoration(
                       labelText: 'Cauta componenta',
@@ -64,7 +64,7 @@ Step buildStepOne() {
                 _gap(),
                 // quantity field
                 Container(
-                  constraints: BoxConstraints(maxWidth: 70),
+                  constraints: BoxConstraints(maxWidth: 60),
                   child: TextFormField(
                     textAlign: TextAlign.center,
                     keyboardType: TextInputType.number,

@@ -3,7 +3,7 @@ import 'package:abac_challenge/src/bloc/myspaceship/myspaceship_bloc.dart';
 import 'package:abac_challenge/src/bloc/myspaceship/myspaceship_event.dart';
 import 'package:abac_challenge/src/bloc/myspaceship/myspaceship_state.dart';
 import 'package:abac_challenge/src/repository/spaceships_repo.dart';
-import 'package:abac_challenge/src/widgets/custom_card.dart';
+import 'package:abac_challenge/src/widgets/cards/spaceship_big_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -44,7 +44,7 @@ class SpaceshipView extends StatelessWidget {
                       itemCount: state.spaceships.length,
                       itemBuilder: (context, index) {
                         var spaceship = state.spaceships[index];
-                        return spaceshipCard(spaceship);
+                        return SpaceshipBigCard(spaceship: spaceship);
                       },
                     ),
                   )
@@ -55,7 +55,7 @@ class SpaceshipView extends StatelessWidget {
                       itemCount: state.spaceships.length,
                       itemBuilder: (context, index) {
                         var spaceship = state.spaceships[index];
-                        return spaceshipCard(spaceship);
+                        return SpaceshipBigCard(spaceship: spaceship);
                       },
                     ),
                   );
