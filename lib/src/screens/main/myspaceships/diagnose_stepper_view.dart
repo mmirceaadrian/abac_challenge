@@ -49,9 +49,9 @@ class DiagnoseStepperView extends StatelessWidget {
                 currentStep: state.currentStepperIndex,
                 type: StepperType.horizontal,
                 steps: [
-                  buildStepOne(),
-                  buildStepTwo(),
-                  buildStepThree(spaceship, state.selectedDate),
+                  buildStepOne(context),
+                  buildStepTwo(context),
+                  buildStepThree(spaceship, context),
                 ],
                 controlsBuilder: (context, controlsDetails) {
                   return Container();

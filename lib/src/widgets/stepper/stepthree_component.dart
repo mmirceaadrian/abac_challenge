@@ -1,10 +1,13 @@
+import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestepper_bloc.dart';
 import 'package:abac_challenge/src/models/spaceship_model.dart';
 import 'package:abac_challenge/src/widgets/cards/mini_card.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-Step buildStepThree(Spaceship? spaceship, DateTime? date) {
+Step buildStepThree(Spaceship? spaceship, BuildContext context) {
   String formattedDate = '';
+  DateTime? date = context.read<DiagnoseStepperBloc>().state.selectedDate;
   if (date != null) {
     formattedDate =
         formatDate(date, [dd, '.', mm, '.', yyyy, ' ', HH, ':', nn]);
@@ -48,7 +51,11 @@ Step buildStepThree(Spaceship? spaceship, DateTime? date) {
         ),
       ],
     ),
-    isActive: true,
+    isActive:
+        context.read<DiagnoseStepperBloc>().state.currentStepperIndex >= 2,
+    state: context.read<DiagnoseStepperBloc>().state.currentStepperIndex == 2
+        ? StepState.editing
+        : StepState.disabled,
   );
 }
 

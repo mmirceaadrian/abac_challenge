@@ -6,7 +6,7 @@ import 'package:abac_challenge/src/models/spaceship_component_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-Step buildStepOne() {
+Step buildStepOne(BuildContext context) {
   var currentQuantity = 1;
   return Step(
     label: Center(child: Text('Creaza deviz')),
@@ -127,7 +127,11 @@ Step buildStepOne() {
         );
       },
     ),
-    isActive: true,
+    isActive:
+        context.read<DiagnoseStepperBloc>().state.currentStepperIndex >= 0,
+    state: context.read<DiagnoseStepperBloc>().state.currentStepperIndex == 0
+        ? StepState.editing
+        : StepState.complete,
   );
 }
 
