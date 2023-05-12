@@ -60,12 +60,13 @@ class DayWidgetState extends State<DayWidget> {
     var startHour = DateTime(day.year, day.month, day.day, widget.startHour);
     for (var i = 0; i <= widget.maxHours; i++) {
       bool isTaken = widget.appointmentCells
-          .where((element) =>
-              element.date.year == day.year &&
-              element.date.month == day.month &&
-              element.date.day == day.day &&
-              element.date.hour == startHour.add(Duration(hours: i)).hour)
-          .isNotEmpty;
+              .where((element) =>
+                  element.date.year == day.year &&
+                  element.date.month == day.month &&
+                  element.date.day == day.day &&
+                  element.date.hour == startHour.add(Duration(hours: i)).hour)
+              .isNotEmpty ||
+          startHour.add(Duration(hours: i)).isBefore(DateTime.now());
 
       bool isSelected = widget.selectedDate != null &&
           widget.selectedDate?.compareTo(startHour.add(Duration(hours: i))) ==

@@ -8,9 +8,17 @@ class AppointmentCell {
   });
 
   factory AppointmentCell.fromJson(Map<String, dynamic> json) {
+    DateTime parsedDate = DateTime.parse(json['date']);
     return AppointmentCell(
       appointmentId: json['appointment_id'],
-      date: json['date'],
+      date: parsedDate,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'appointment_id': appointmentId,
+      'date': date,
+    };
   }
 }

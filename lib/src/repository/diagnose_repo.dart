@@ -34,53 +34,61 @@ class DiagnoseRepo {
   }
 
   Future<List<AppointmentCell>> getAppointmentCells(
-      DateTime startDate, DateTime endDate) {
-    var list = <AppointmentCell>[];
+      DateTime startDate, DateTime endDate) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+    startDate = startDate.subtract(Duration(
+        hours: startDate.hour,
+        minutes: startDate.minute,
+        seconds: startDate.second,
+        milliseconds: startDate.millisecond,
+        microseconds: startDate.microsecond));
+    endDate = endDate.subtract(Duration(
+        hours: endDate.hour,
+        minutes: endDate.minute,
+        seconds: endDate.second,
+        milliseconds: endDate.millisecond,
+        microseconds: endDate.microsecond));
 
-    list.add(
-      AppointmentCell(
-        appointmentId: 1,
-        date: DateTime(2023, 5, 12, 9, 0),
-      ),
+    var response = await http.get(
+        Uri.parse(
+            '${Config.baseUrl}/spaceship/get_appointments?start_date=$startDate&end_date=$endDate'),
+        headers: {
+          'accept': 'application/json',
+          'Content-Type': 'application/json-patch+json',
+          'Authorization': 'Bearer $token',
+        });
+
+    if (response.statusCode == 200) {
+      var appointmentList = jsonDecode(response.body);
+      var returnList = <AppointmentCell>[];
+      for (var appointment in appointmentList) {
+        returnList.add(AppointmentCell.fromJson(appointment));
+      }
+      return returnList;
+    } else {
+      throw Exception('Failed to load appointments');
+    }
+  }
+
+  Future<String> addAppointment(AppointmentCell appointmentCell) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+
+    var response = await http.post(
+      Uri.parse('${Config.baseUrl}/spaceship/add_appointments'),
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/json-patch+json',
+        'Authorization': 'Bearer $token',
+      },
+      body: jsonEncode(appointmentCell.toJson()),
     );
 
-    list.add(
-      AppointmentCell(
-        appointmentId: 2,
-        date: DateTime(2023, 5, 15, 9, 0),
-      ),
-    );
-
-    list.add(
-      AppointmentCell(
-        appointmentId: 3,
-        date: DateTime(2023, 5, 12, 10, 0),
-      ),
-    );
-
-    list.add(
-      AppointmentCell(
-        appointmentId: 6,
-        date: DateTime(2023, 5, 12, 13, 0),
-      ),
-    );
-
-    list.add(
-      AppointmentCell(
-        appointmentId: 7,
-        date: DateTime(2023, 5, 16, 14, 0),
-      ),
-    );
-
-    list.add(
-      AppointmentCell(
-        appointmentId: 8,
-        date: DateTime(2023, 5, 17, 15, 0),
-      ),
-    );
-
-    Future.delayed(Duration(seconds: 2));
-
-    return Future.value(list);
+    if (response.statusCode == 200) {
+      return 'Appointment added successfully';
+    } else {
+      throw Exception('Failed to add appointment');
+    }
   }
 }
