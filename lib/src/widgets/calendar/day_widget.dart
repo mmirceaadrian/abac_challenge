@@ -73,8 +73,10 @@ class DayWidgetState extends State<DayWidget> {
               0;
 
       appointments.add(
-        Padding(
-          padding: const EdgeInsets.all(8.0),
+        Container(
+          margin: const EdgeInsets.symmetric(vertical: 4),
+          width: isSelected ? 65 : 60,
+          height: 35,
           child: TextButton(
             style: TextButton.styleFrom(
               backgroundColor: isTaken
