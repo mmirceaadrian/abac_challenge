@@ -1,5 +1,5 @@
 import 'package:abac_challenge/constants.dart';
-import 'package:abac_challenge/src/models/appointment_cell.dart';
+import 'package:abac_challenge/src/models/appointmentcell_model.dart';
 import 'package:flutter/material.dart';
 
 class DayWidget extends StatefulWidget {

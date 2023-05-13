@@ -1,4 +1,4 @@
-import 'package:abac_challenge/src/models/appointment_cell.dart';
+import 'package:abac_challenge/src/models/appointmentcell_model.dart';
 import 'package:abac_challenge/src/widgets/calendar/day_widget.dart';
 import 'package:flutter/material.dart';
 

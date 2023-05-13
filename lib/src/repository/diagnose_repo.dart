@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:abac_challenge/config/config.dart';
-import 'package:abac_challenge/src/models/appointment_cell.dart';
+import 'package:abac_challenge/src/models/appointmentcell_model.dart';
 import 'package:abac_challenge/src/models/spaceship_component_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;

@@ -1,3 +1,4 @@
+
 class AppointmentCell {
   int appointmentId;
   DateTime date;
