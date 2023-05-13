@@ -175,5 +175,10 @@ class DiagnoseStepperBloc
         emit(state.copyWith(searchedServices: []));
       }
     }
+
+    // Event for selecting a service
+    if (event is DiagnoseStepperSelectService) {
+      emit(state.copyWith(selectedService: event.service));
+    }
   }
 }

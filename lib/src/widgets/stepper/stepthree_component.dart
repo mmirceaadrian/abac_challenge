@@ -170,6 +170,18 @@ Step buildStepThree(Spaceship? spaceship, BuildContext context) {
                                         'Cost estimate ${service.cost.toString()} RON',
                                     rating:
                                         '${service.rating.toString()} (${service.reviews.toString()})',
+                                    onTap: () {
+                                      context.read<DiagnoseStepperBloc>().add(
+                                            DiagnoseStepperSelectService(
+                                                service: service),
+                                          );
+                                    },
+                                    isSelected: context
+                                            .read<DiagnoseStepperBloc>()
+                                            .state
+                                            .selectedService
+                                            ?.serviceId ==
+                                        service.serviceId,
                                   ),
                                 ))
                             .toList(),

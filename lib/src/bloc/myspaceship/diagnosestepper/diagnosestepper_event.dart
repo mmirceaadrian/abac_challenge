@@ -1,3 +1,4 @@
+import 'package:abac_challenge/src/models/service_model.dart';
 import 'package:abac_challenge/src/models/spaceship_component_model.dart';
 import 'package:abac_challenge/src/models/spaceship_model.dart';
 
@@ -72,3 +73,9 @@ class DiagnoseStepperSearchService extends DiagnoseStepperEvent {
 }
 
 class DiagnoseStepperFilter extends DiagnoseStepperEvent {}
+
+class DiagnoseStepperSelectService extends DiagnoseStepperEvent {
+  final ServiceModel service;
+
+  DiagnoseStepperSelectService({required this.service});
+}
