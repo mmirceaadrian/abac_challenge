@@ -40,7 +40,7 @@ class MediumCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            title!,
+                            title,
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -63,7 +63,7 @@ class MediumCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 32.0),
                     child: Text(
-                      bottomText!,
+                      bottomText,
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
@@ -100,7 +100,7 @@ class MediumCard extends StatelessWidget {
               height: 100,
               width: 100,
               child: Image.network(
-                image!,
+                image,
                 fit: BoxFit.cover,
               ),
             ),
