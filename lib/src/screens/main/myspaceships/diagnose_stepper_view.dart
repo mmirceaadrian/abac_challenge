@@ -30,6 +30,9 @@ class DiagnoseStepperView extends StatelessWidget {
         )
         ..add(
           DiagnoseStepperInitialize(spaceship: spaceship),
+        )
+        ..add(
+          DiagnoseStepperSearchService(query: ""),
         ),
       child: BlocListener<DiagnoseStepperBloc, DiagnoseStepperState>(
         listener: (context, state) {
@@ -73,40 +76,43 @@ class DiagnoseStepperView extends StatelessWidget {
     String nextText = nextButtonText ?? 'INAINTE';
     return BlocBuilder<DiagnoseStepperBloc, DiagnoseStepperState>(
       builder: (context, state) {
-        return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              TextButton(
-                onPressed: () => {
-                  context
-                      .read<DiagnoseStepperBloc>()
-                      .add(DiagnoseStepperPreviousStep())
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(returnText,
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black54)),
+        return Container(
+          color: Colors.white,
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                TextButton(
+                  onPressed: () => {
+                    context
+                        .read<DiagnoseStepperBloc>()
+                        .add(DiagnoseStepperPreviousStep())
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(returnText,
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black54)),
+                  ),
                 ),
-              ),
-              TextButton(
-                onPressed: () => {
-                  context
-                      .read<DiagnoseStepperBloc>()
-                      .add(DiagnoseStepperNextStep())
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(nextText,
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black54)),
+                TextButton(
+                  onPressed: () => {
+                    context
+                        .read<DiagnoseStepperBloc>()
+                        .add(DiagnoseStepperNextStep())
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(nextText,
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black54)),
+                  ),
                 ),
-              ),
-            ]);
+              ]),
+        );
       },
     );
   }

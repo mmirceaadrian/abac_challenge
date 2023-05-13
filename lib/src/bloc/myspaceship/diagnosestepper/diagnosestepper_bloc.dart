@@ -22,7 +22,7 @@ class DiagnoseStepperBloc
     }
 
     // Event for searching components
-    if (event is DiagnoseStepperSearch) {
+    if (event is DiagnoseStepperSearchComponent) {
       try {
         if (event.query.isEmpty) {
           emit(state.copyWith(searchedComponents: []));
@@ -120,6 +120,18 @@ class DiagnoseStepperBloc
     if (event is DiagnoseStepperSortByTime) {
       print("sort by time${event.value}");
       emit(state.copyWith(sortByTime: event.value));
+    }
+
+    // Event for searching services
+    if (event is DiagnoseStepperSearchService) {
+      try {
+        var services = await diagnoseRepo.getServices(event.query,
+            state.sortByRating, state.sortByPrice, state.sortByTime);
+        print(services);
+        emit(state.copyWith(searchedServices: services));
+      } catch (e) {
+        emit(state.copyWith(searchedServices: []));
+      }
     }
   }
 }

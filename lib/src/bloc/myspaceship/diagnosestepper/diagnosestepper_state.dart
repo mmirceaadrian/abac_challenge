@@ -1,4 +1,5 @@
 import 'package:abac_challenge/src/models/appointmentcell_model.dart';
+import 'package:abac_challenge/src/models/service_model.dart';
 import 'package:abac_challenge/src/models/spaceship_component_model.dart';
 import 'package:abac_challenge/src/models/spaceship_model.dart';
 
@@ -21,6 +22,8 @@ class DiagnoseStepperState {
   bool sortByPrice;
   bool sortByRating;
   bool sortByTime;
+  List<ServiceModel> searchedServices;
+  ServiceModel? selectedService;
 
   DiagnoseStepperState(
       {this.selectedSpaceship,
@@ -34,7 +37,9 @@ class DiagnoseStepperState {
       this.selectedDate,
       this.sortByPrice = false,
       this.sortByRating = false,
-      this.sortByTime = false});
+      this.sortByTime = false,
+      this.searchedServices = const [],
+      this.selectedService});
 
   DiagnoseStepperState copyWith({
     Spaceship? selectedSpaceship,
@@ -49,6 +54,8 @@ class DiagnoseStepperState {
     bool? sortByPrice,
     bool? sortByRating,
     bool? sortByTime,
+    List<ServiceModel>? searchedServices,
+    ServiceModel? selectedService,
   }) {
     return DiagnoseStepperState(
       selectedSpaceship: selectedSpaceship ?? this.selectedSpaceship,
@@ -63,6 +70,8 @@ class DiagnoseStepperState {
       sortByPrice: sortByPrice ?? this.sortByPrice,
       sortByRating: sortByRating ?? this.sortByRating,
       sortByTime: sortByTime ?? this.sortByTime,
+      searchedServices: searchedServices ?? this.searchedServices,
+      selectedService: selectedService ?? this.selectedService,
     );
   }
 }

@@ -3,10 +3,10 @@ import 'package:abac_challenge/src/models/spaceship_model.dart';
 
 abstract class DiagnoseStepperEvent {}
 
-class DiagnoseStepperSearch extends DiagnoseStepperEvent {
+class DiagnoseStepperSearchComponent extends DiagnoseStepperEvent {
   final String query;
 
-  DiagnoseStepperSearch({required this.query});
+  DiagnoseStepperSearchComponent({required this.query});
 }
 
 class DiagnoseStepperAddComponent extends DiagnoseStepperEvent {
@@ -63,4 +63,10 @@ class DiagnoseStepperSortByTime extends DiagnoseStepperEvent {
   final bool value;
 
   DiagnoseStepperSortByTime({required this.value});
+}
+
+class DiagnoseStepperSearchService extends DiagnoseStepperEvent {
+  final String query;
+
+  DiagnoseStepperSearchService({required this.query});
 }

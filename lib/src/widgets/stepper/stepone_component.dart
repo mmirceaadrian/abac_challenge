@@ -62,7 +62,7 @@ Step buildStepOne(BuildContext context) {
                     onChanged: (value) {
                       context
                           .read<DiagnoseStepperBloc>()
-                          .add(DiagnoseStepperSearch(query: value));
+                          .add(DiagnoseStepperSearchComponent(query: value));
                     },
                   ),
                 ),

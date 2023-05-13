@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:abac_challenge/config/config.dart';
 import 'package:abac_challenge/src/models/appointmentcell_model.dart';
+import 'package:abac_challenge/src/models/service_model.dart';
 import 'package:abac_challenge/src/models/spaceship_component_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -89,6 +90,35 @@ class DiagnoseRepo {
       return 'Appointment added successfully';
     } else {
       throw Exception('Failed to add appointment');
+    }
+  }
+
+  Future<List<ServiceModel>> getServices(String searchString, bool sortByRating,
+      bool sortByPrice, bool sortByTime) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+
+    // should be a paginate api call but to keep it simple i will get all the data
+    // and sort it locally
+    var response = await http.get(
+      Uri.parse(
+          '${Config.baseUrl}/spaceship/get_services?search_string=$searchString'),
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/json-patch+json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      var serviceList = jsonDecode(response.body);
+      var returnList = <ServiceModel>[];
+      for (var service in serviceList) {
+        returnList.add(ServiceModel.fromJson(service));
+      }
+      return returnList;
+    } else {
+      throw Exception('Failed to load services');
     }
   }
 }

@@ -1,6 +1,8 @@
 import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestepper_bloc.dart';
 import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestepper_event.dart';
+import 'package:abac_challenge/src/models/service_model.dart';
 import 'package:abac_challenge/src/models/spaceship_model.dart';
+import 'package:abac_challenge/src/widgets/cards/medium_card.dart';
 import 'package:abac_challenge/src/widgets/cards/mini_card.dart';
 import 'package:abac_challenge/src/widgets/checkbox/checkbox_widget.dart';
 import 'package:date_format/date_format.dart';
@@ -66,6 +68,9 @@ Step buildStepThree(Spaceship? spaceship, BuildContext context) {
             ),
             onChanged: (value) {
               print(value);
+              context
+                  .read<DiagnoseStepperBloc>()
+                  .add(DiagnoseStepperSearchService(query: value));
             },
           ),
         ),
@@ -112,6 +117,60 @@ Step buildStepThree(Spaceship? spaceship, BuildContext context) {
           ],
         ),
         _gap(8),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 32),
+          child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              int cardPerRow = 1;
+              double screenWidth = constraints.maxWidth;
+
+              // adjust the number of cards to display per row based on screen width
+              if (screenWidth >= 1000) {
+                cardPerRow = 3;
+              } else if (screenWidth >= 800) {
+                cardPerRow = 2;
+              }
+
+              return SingleChildScrollView(
+                child: Column(
+                  children: List.generate(
+                    (context
+                                .read<DiagnoseStepperBloc>()
+                                .state
+                                .searchedServices
+                                .length /
+                            cardPerRow)
+                        .ceil(), // calculate number of rows needed
+                    (rowIndex) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: context
+                            .read<DiagnoseStepperBloc>()
+                            .state
+                            .searchedServices
+                            .skip(rowIndex *
+                                cardPerRow) // skip cards that are already displayed in previous rows
+                            .take(
+                                cardPerRow) // display the next batch of cards in a row
+                            .map((service) => Expanded(
+                                  child: MediumCard(
+                                    title: service.name,
+                                    subtitle: service.location,
+                                    image: service.image,
+                                    bottomText:
+                                        'Cost estimate ${service.cost.toString()}',
+                                    rating: service.rating.toString(),
+                                  ),
+                                ))
+                            .toList(),
+                      );
+                    },
+                  ),
+                ),
+              );
+            },
+          ),
+        )
       ],
     ),
     isActive:
@@ -120,6 +179,19 @@ Step buildStepThree(Spaceship? spaceship, BuildContext context) {
         ? StepState.editing
         : StepState.disabled,
   );
+}
+
+double _buildAspectRatio(BuildContext context) {
+  // function depends on the screen size for grid view
+  if (MediaQuery.of(context).size.width > 1800) {
+    return 1.5;
+  } else if (MediaQuery.of(context).size.width > 1500) {
+    return 1.3;
+  } else if (MediaQuery.of(context).size.width > 1200) {
+    return 1.2;
+  } else {
+    return 1.1;
+  }
 }
 
 SizedBox _gap(double height) {
