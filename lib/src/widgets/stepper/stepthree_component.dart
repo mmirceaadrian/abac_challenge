@@ -91,6 +91,9 @@ Step buildStepThree(Spaceship? spaceship, BuildContext context) {
                 context
                     .read<DiagnoseStepperBloc>()
                     .add(DiagnoseStepperSortByRating(value: value!));
+                context
+                    .read<DiagnoseStepperBloc>()
+                    .add(DiagnoseStepperFilter());
               },
               title: 'rating',
               value: context.read<DiagnoseStepperBloc>().state.sortByRating,
@@ -100,6 +103,9 @@ Step buildStepThree(Spaceship? spaceship, BuildContext context) {
                 context
                     .read<DiagnoseStepperBloc>()
                     .add(DiagnoseStepperSortByPrice(value: value!));
+                context
+                    .read<DiagnoseStepperBloc>()
+                    .add(DiagnoseStepperFilter());
               },
               title: 'pret',
               value: context.read<DiagnoseStepperBloc>().state.sortByPrice,
@@ -109,6 +115,9 @@ Step buildStepThree(Spaceship? spaceship, BuildContext context) {
                 context
                     .read<DiagnoseStepperBloc>()
                     .add(DiagnoseStepperSortByTime(value: value!));
+                context
+                    .read<DiagnoseStepperBloc>()
+                    .add(DiagnoseStepperFilter());
               },
               title: 'time',
               value: context.read<DiagnoseStepperBloc>().state.sortByTime,
@@ -136,7 +145,7 @@ Step buildStepThree(Spaceship? spaceship, BuildContext context) {
                     (context
                                 .read<DiagnoseStepperBloc>()
                                 .state
-                                .searchedServices
+                                .sortedServices
                                 .length /
                             cardPerRow)
                         .ceil(), // calculate number of rows needed
@@ -146,7 +155,7 @@ Step buildStepThree(Spaceship? spaceship, BuildContext context) {
                         children: context
                             .read<DiagnoseStepperBloc>()
                             .state
-                            .searchedServices
+                            .sortedServices
                             .skip(rowIndex *
                                 cardPerRow) // skip cards that are already displayed in previous rows
                             .take(
@@ -157,7 +166,7 @@ Step buildStepThree(Spaceship? spaceship, BuildContext context) {
                                     subtitle: service.location,
                                     image: service.image,
                                     bottomText:
-                                        'Cost estimate ${service.cost.toString()}',
+                                        'Cost estimate ${service.cost.toString()} RON',
                                     rating:
                                         '${service.rating.toString()} (${service.reviews.toString()})',
                                   ),

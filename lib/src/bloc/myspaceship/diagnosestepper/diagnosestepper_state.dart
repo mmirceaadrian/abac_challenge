@@ -23,6 +23,7 @@ class DiagnoseStepperState {
   bool sortByRating;
   bool sortByTime;
   List<ServiceModel> searchedServices;
+  List<ServiceModel> sortedServices; // TODO: remove this when backend is ready
   ServiceModel? selectedService;
 
   DiagnoseStepperState(
@@ -39,7 +40,8 @@ class DiagnoseStepperState {
       this.sortByRating = false,
       this.sortByTime = false,
       this.searchedServices = const [],
-      this.selectedService});
+      this.selectedService,
+      this.sortedServices = const []});
 
   DiagnoseStepperState copyWith({
     Spaceship? selectedSpaceship,
@@ -56,6 +58,7 @@ class DiagnoseStepperState {
     bool? sortByTime,
     List<ServiceModel>? searchedServices,
     ServiceModel? selectedService,
+    List<ServiceModel>? sortedServices,
   }) {
     return DiagnoseStepperState(
       selectedSpaceship: selectedSpaceship ?? this.selectedSpaceship,
@@ -72,6 +75,7 @@ class DiagnoseStepperState {
       sortByTime: sortByTime ?? this.sortByTime,
       searchedServices: searchedServices ?? this.searchedServices,
       selectedService: selectedService ?? this.selectedService,
+      sortedServices: sortedServices ?? this.sortedServices,
     );
   }
 }

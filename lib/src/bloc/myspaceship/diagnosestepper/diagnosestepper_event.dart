@@ -70,3 +70,5 @@ class DiagnoseStepperSearchService extends DiagnoseStepperEvent {
 
   DiagnoseStepperSearchService({required this.query});
 }
+
+class DiagnoseStepperFilter extends DiagnoseStepperEvent {}

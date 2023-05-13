@@ -108,27 +108,40 @@ class DiagnoseStepperBloc
     }
 
     if (event is DiagnoseStepperSortByPrice) {
-      print("sort by price${event.value}");
+      // sort by price
       emit(state.copyWith(sortByPrice: event.value));
     }
 
     if (event is DiagnoseStepperSortByRating) {
-      print("sort by rating${event.value}");
+      // sort by rating
       emit(state.copyWith(sortByRating: event.value));
     }
 
     if (event is DiagnoseStepperSortByTime) {
-      print("sort by time${event.value}");
+      // sort by time
       emit(state.copyWith(sortByTime: event.value));
+    }
+
+    if (event is DiagnoseStepperFilter) {
+      state.sortedServices = state.searchedServices;
+      if (state.sortByPrice) {
+        if (state.sortByRating) {
+          state.sortedServices.sort((a, b) =>
+              a.cost.compareTo(b.cost) & b.rating.compareTo(a.rating));
+        } else {
+          state.sortedServices.sort((a, b) => a.cost.compareTo(b.cost));
+        }
+      } else if (state.sortByRating) {
+        state.sortedServices.sort((a, b) => b.rating.compareTo(a.rating));
+      }
     }
 
     // Event for searching services
     if (event is DiagnoseStepperSearchService) {
       try {
-        var services = await diagnoseRepo.getServices(event.query,
-            state.sortByRating, state.sortByPrice, state.sortByTime);
-        print(services);
-        emit(state.copyWith(searchedServices: services));
+        var services = await diagnoseRepo.getServices(event.query);
+        emit(state.copyWith(
+            searchedServices: services, sortedServices: services));
       } catch (e) {
         emit(state.copyWith(searchedServices: []));
       }

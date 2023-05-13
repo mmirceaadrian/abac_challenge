@@ -93,13 +93,12 @@ class DiagnoseRepo {
     }
   }
 
-  Future<List<ServiceModel>> getServices(String searchString, bool sortByRating,
-      bool sortByPrice, bool sortByTime) async {
+  Future<List<ServiceModel>> getServices(String searchString) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
 
     // should be a paginate api call but to keep it simple i will get all the data
-    // and sort it locally
+    // and sort it locally with 3 events
     var response = await http.get(
       Uri.parse(
           '${Config.baseUrl}/spaceship/get_services?search_string=$searchString'),
