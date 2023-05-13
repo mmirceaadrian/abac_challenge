@@ -1,6 +1,5 @@
 import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestepper_bloc.dart';
 import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestepper_event.dart';
-import 'package:abac_challenge/src/models/service_model.dart';
 import 'package:abac_challenge/src/models/spaceship_model.dart';
 import 'package:abac_challenge/src/widgets/cards/medium_card.dart';
 import 'package:abac_challenge/src/widgets/cards/mini_card.dart';
@@ -159,7 +158,8 @@ Step buildStepThree(Spaceship? spaceship, BuildContext context) {
                                     image: service.image,
                                     bottomText:
                                         'Cost estimate ${service.cost.toString()}',
-                                    rating: service.rating.toString(),
+                                    rating:
+                                        '${service.rating.toString()} (${service.reviews.toString()})',
                                   ),
                                 ))
                             .toList(),

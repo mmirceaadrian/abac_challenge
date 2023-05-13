@@ -30,35 +30,44 @@ class SpaceshipView extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             }
-            return MediaQuery.of(context).size.width > kWidth
-                ? Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 8,
-                        mainAxisSpacing: 8,
-                        childAspectRatio:
-                            aspectRatio(MediaQuery.of(context).size.width),
+
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: LayoutBuilder(
+                  builder: (BuildContext content, BoxConstraints constraints) {
+                int cardPerRow = 1;
+                double screenWidth = constraints.maxWidth;
+
+                // adjust the number of cards to display per row based on screen width
+                if (screenWidth >= kWidth) {
+                  cardPerRow = 2;
+                }
+
+                return SingleChildScrollView(
+                  child: Column(
+                    children: List.generate(
+                      (state.spaceships.length / cardPerRow).ceil(),
+                      (rowIndex) => Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: state.spaceships
+                            .skip(rowIndex * cardPerRow)
+                            .take(cardPerRow)
+                            .map((spaceship) {
+                          return Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: SpaceshipBigCard(
+                                spaceship: spaceship,
+                              ),
+                            ),
+                          );
+                        }).toList(),
                       ),
-                      itemCount: state.spaceships.length,
-                      itemBuilder: (context, index) {
-                        var spaceship = state.spaceships[index];
-                        return SpaceshipBigCard(spaceship: spaceship);
-                      },
                     ),
-                  )
-                : Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      itemCount: state.spaceships.length,
-                      itemBuilder: (context, index) {
-                        var spaceship = state.spaceships[index];
-                        return SpaceshipBigCard(spaceship: spaceship);
-                      },
-                    ),
-                  );
+                  ),
+                );
+              }),
+            );
           },
         ),
         backgroundColor: bgColor,
