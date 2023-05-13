@@ -66,7 +66,6 @@ Step buildStepThree(Spaceship? spaceship, BuildContext context) {
               ),
             ),
             onChanged: (value) {
-              print(value);
               context
                   .read<DiagnoseStepperBloc>()
                   .add(DiagnoseStepperSearchService(query: value));
@@ -201,19 +200,6 @@ Step buildStepThree(Spaceship? spaceship, BuildContext context) {
         ? StepState.editing
         : StepState.disabled,
   );
-}
-
-double _buildAspectRatio(BuildContext context) {
-  // function depends on the screen size for grid view
-  if (MediaQuery.of(context).size.width > 1800) {
-    return 1.5;
-  } else if (MediaQuery.of(context).size.width > 1500) {
-    return 1.3;
-  } else if (MediaQuery.of(context).size.width > 1200) {
-    return 1.2;
-  } else {
-    return 1.1;
-  }
 }
 
 SizedBox _gap(double height) {

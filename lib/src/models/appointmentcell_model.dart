@@ -1,4 +1,3 @@
-
 class AppointmentCell {
   int appointmentId;
   DateTime date;
@@ -19,7 +18,7 @@ class AppointmentCell {
   Map<String, dynamic> toJson() {
     return {
       'appointment_id': appointmentId,
-      'date': date,
+      'date': date.toString(),
     };
   }
 }

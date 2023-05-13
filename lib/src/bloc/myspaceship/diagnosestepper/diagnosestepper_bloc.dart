@@ -1,6 +1,7 @@
 import 'package:abac_challenge/src/bloc/main/main_cubit.dart';
 import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestepper_event.dart';
 import 'package:abac_challenge/src/bloc/myspaceship/diagnosestepper/diagnosestepper_state.dart';
+import 'package:abac_challenge/src/models/appointmentcell_model.dart';
 import 'package:abac_challenge/src/repository/diagnose_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -68,7 +69,11 @@ class DiagnoseStepperBloc
     // Event for switching to the next step
     if (event is DiagnoseStepperNextStep) {
       if (state.currentStepperIndex == state.maxSteps) {
-        // TODO: Add logic to send data to server and navigate to result screen
+        if (state.selectedService == null) {
+          emit(state.copyWith(error: 'Please select a service'));
+          return;
+        }
+        emit(state.copyWith(showDialog: true));
         return;
       }
       if (state.selectedComponents.isEmpty) {
@@ -179,6 +184,16 @@ class DiagnoseStepperBloc
     // Event for selecting a service
     if (event is DiagnoseStepperSelectService) {
       emit(state.copyWith(selectedService: event.service));
+    }
+
+    // Event for sending a appointment request
+    if (event is DiagnoseStepperSendAppointment) {
+      try {
+        diagnoseRepo.addAppointment(
+            AppointmentCell(appointmentId: 0, date: state.selectedDate!));
+      } catch (e) {
+        emit(state.copyWith(error: 'Something went wrong'));
+      }
     }
   }
 }

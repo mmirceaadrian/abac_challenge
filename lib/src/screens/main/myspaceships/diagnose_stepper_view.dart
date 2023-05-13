@@ -44,6 +44,42 @@ class DiagnoseStepperView extends StatelessWidget {
               ),
             );
           }
+
+          if (state.showDialog == true) {
+            showDialog(
+              context: context,
+              builder: (ctx) => AlertDialog(
+                title: const Text("Programare"),
+                content: const Text("Esti sigur ca vrei sa faci programarea?"),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      state.showDialog = false;
+                      context.read<DiagnoseStepperBloc>().add(
+                            DiagnoseStepperSendAppointment(),
+                          );
+                      context.read<MainCubit>().showSpaceships();
+                      Navigator.of(ctx).pop();
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(14),
+                      child: const Text("Da"),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      state.showDialog = false;
+                      Navigator.of(ctx).pop();
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(14),
+                      child: const Text("Nu"),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
         },
         child: BlocBuilder<DiagnoseStepperBloc, DiagnoseStepperState>(
           builder: (context, state) {

@@ -70,7 +70,7 @@ class SpaceshipView extends StatelessWidget {
             );
           },
         ),
-        backgroundColor: bgColor,
+        backgroundColor: kBackgroundColor,
       ),
     );
   }

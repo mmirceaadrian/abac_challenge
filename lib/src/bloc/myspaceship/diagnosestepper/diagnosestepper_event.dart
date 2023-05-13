@@ -79,3 +79,5 @@ class DiagnoseStepperSelectService extends DiagnoseStepperEvent {
 
   DiagnoseStepperSelectService({required this.service});
 }
+
+class DiagnoseStepperSendAppointment extends DiagnoseStepperEvent {}

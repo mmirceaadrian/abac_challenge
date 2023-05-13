@@ -77,7 +77,7 @@ class DiagnoseRepo {
     final token = prefs.getString('token');
 
     var response = await http.post(
-      Uri.parse('${Config.baseUrl}/spaceship/add_appointments'),
+      Uri.parse('${Config.baseUrl}/spaceship/add_appointment'),
       headers: {
         'accept': 'application/json',
         'Content-Type': 'application/json-patch+json',
@@ -86,7 +86,7 @@ class DiagnoseRepo {
       body: jsonEncode(appointmentCell.toJson()),
     );
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       return 'Appointment added successfully';
     } else {
       throw Exception('Failed to add appointment');

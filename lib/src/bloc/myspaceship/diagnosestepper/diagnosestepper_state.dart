@@ -23,25 +23,29 @@ class DiagnoseStepperState {
   bool sortByRating;
   bool sortByTime;
   List<ServiceModel> searchedServices;
-  List<ServiceModel> sortedServices; // TODO: remove this when backend is ready
+  List<ServiceModel> sortedServices; // remove this when backend is ready
   ServiceModel? selectedService;
 
-  DiagnoseStepperState(
-      {this.selectedSpaceship,
-      this.selectedComponents = const [],
-      this.searchedComponents = const [],
-      this.appointmentCells = const [],
-      this.error = '',
-      this.currentStepperIndex = 0,
-      this.returnButtonText = 'INAPOI',
-      this.nextButtonText = 'INAINTE',
-      this.selectedDate,
-      this.sortByPrice = false,
-      this.sortByRating = false,
-      this.sortByTime = false,
-      this.searchedServices = const [],
-      this.selectedService,
-      this.sortedServices = const []});
+  bool showDialog;
+
+  DiagnoseStepperState({
+    this.selectedSpaceship,
+    this.selectedComponents = const [],
+    this.searchedComponents = const [],
+    this.appointmentCells = const [],
+    this.error = '',
+    this.currentStepperIndex = 0,
+    this.returnButtonText = 'INAPOI',
+    this.nextButtonText = 'INAINTE',
+    this.selectedDate,
+    this.sortByPrice = false,
+    this.sortByRating = false,
+    this.sortByTime = false,
+    this.searchedServices = const [],
+    this.selectedService,
+    this.sortedServices = const [],
+    this.showDialog = false,
+  });
 
   DiagnoseStepperState copyWith({
     Spaceship? selectedSpaceship,
@@ -59,6 +63,7 @@ class DiagnoseStepperState {
     List<ServiceModel>? searchedServices,
     ServiceModel? selectedService,
     List<ServiceModel>? sortedServices,
+    bool? showDialog,
   }) {
     return DiagnoseStepperState(
       selectedSpaceship: selectedSpaceship ?? this.selectedSpaceship,
@@ -76,6 +81,7 @@ class DiagnoseStepperState {
       searchedServices: searchedServices ?? this.searchedServices,
       selectedService: selectedService ?? this.selectedService,
       sortedServices: sortedServices ?? this.sortedServices,
+      showDialog: showDialog ?? this.showDialog,
     );
   }
 }

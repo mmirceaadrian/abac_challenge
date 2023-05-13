@@ -1,3 +1,4 @@
+import 'package:abac_challenge/constants.dart';
 import 'package:flutter/material.dart';
 
 class AppointmentsView extends StatelessWidget {
@@ -5,6 +6,6 @@ class AppointmentsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(color: Colors.blue);
+    return Container(color: kBackgroundColor);
   }
 }
