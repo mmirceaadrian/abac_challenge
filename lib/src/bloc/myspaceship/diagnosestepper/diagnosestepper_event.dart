@@ -46,3 +46,21 @@ class DiagnoseStepperInitialize extends DiagnoseStepperEvent {
 
   DiagnoseStepperInitialize({required this.spaceship});
 }
+
+class DiagnoseStepperSortByPrice extends DiagnoseStepperEvent {
+  final bool value;
+
+  DiagnoseStepperSortByPrice({required this.value});
+}
+
+class DiagnoseStepperSortByRating extends DiagnoseStepperEvent {
+  final bool value;
+
+  DiagnoseStepperSortByRating({required this.value});
+}
+
+class DiagnoseStepperSortByTime extends DiagnoseStepperEvent {
+  final bool value;
+
+  DiagnoseStepperSortByTime({required this.value});
+}

@@ -16,9 +16,12 @@ class DiagnoseStepperBloc
 
   Future<void> _onEvent(
       DiagnoseStepperEvent event, Emitter<DiagnoseStepperState> emit) async {
+    // Event for initializing the stepper
     if (event is DiagnoseStepperInitialize) {
       emit(state.copyWith(selectedSpaceship: event.spaceship));
     }
+
+    // Event for searching components
     if (event is DiagnoseStepperSearch) {
       try {
         if (event.query.isEmpty) {
@@ -31,6 +34,8 @@ class DiagnoseStepperBloc
         emit(state.copyWith(searchedComponents: []));
       }
     }
+
+    // Event for adding a component to the list of selected components
     if (event is DiagnoseStepperAddComponent) {
       var index = state.selectedComponents.indexWhere((element) =>
           element.spaceshipComponentId ==
@@ -46,6 +51,8 @@ class DiagnoseStepperBloc
         emit(state.copyWith(error: 'Component already added'));
       }
     }
+
+    // Event for removing a component from the list of selected components
     if (event is DiagnoseStepperRemoveComponent) {
       var index = state.selectedComponents.indexWhere((element) =>
           element.spaceshipComponentId ==
@@ -58,6 +65,7 @@ class DiagnoseStepperBloc
       }
     }
 
+    // Event for switching to the next step
     if (event is DiagnoseStepperNextStep) {
       if (state.currentStepperIndex == state.maxSteps) {
         // TODO: Add logic to send data to server and navigate to result screen
@@ -74,6 +82,7 @@ class DiagnoseStepperBloc
       emit(state.copyWith(currentStepperIndex: state.currentStepperIndex + 1));
     }
 
+    // Event for switching to the previous step
     if (event is DiagnoseStepperPreviousStep) {
       if (state.currentStepperIndex == 0) {
         mainCubit.showSpaceships();
@@ -82,6 +91,7 @@ class DiagnoseStepperBloc
       emit(state.copyWith(currentStepperIndex: state.currentStepperIndex - 1));
     }
 
+    // Event for getting the booked appointment cells
     if (event is DiagnoseStepperGetAppointmentCells) {
       try {
         var cells = await diagnoseRepo.getAppointmentCells(
@@ -92,8 +102,24 @@ class DiagnoseStepperBloc
       }
     }
 
+    // Event for selecting a date
     if (event is DiagnoseStepperSelectDate) {
       emit(state.copyWith(selectedDate: event.date, error: ''));
+    }
+
+    if (event is DiagnoseStepperSortByPrice) {
+      print("sort by price${event.value}");
+      emit(state.copyWith(sortByPrice: event.value));
+    }
+
+    if (event is DiagnoseStepperSortByRating) {
+      print("sort by rating${event.value}");
+      emit(state.copyWith(sortByRating: event.value));
+    }
+
+    if (event is DiagnoseStepperSortByTime) {
+      print("sort by time${event.value}");
+      emit(state.copyWith(sortByTime: event.value));
     }
   }
 }

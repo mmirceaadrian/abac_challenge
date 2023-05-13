@@ -51,8 +51,13 @@ Step buildStepOne(BuildContext context) {
                   constraints: BoxConstraints(maxWidth: 200),
                   child: TextFormField(
                     decoration: InputDecoration(
-                      labelText: 'Cauta componenta',
-                      icon: Icon(Icons.search),
+                      suffixIcon: Icon(Icons.search),
+                      hintText: "Cauta componenta",
+                      hintStyle: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black.withOpacity(0.4),
+                      ),
                     ),
                     onChanged: (value) {
                       context

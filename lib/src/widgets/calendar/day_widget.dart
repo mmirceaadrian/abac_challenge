@@ -37,20 +37,23 @@ class DayWidgetState extends State<DayWidget> {
               color: kPrimaryLightColor.withOpacity(0.1),
             )
           : null,
-      child: Column(
-        children: [
-          Text(_getDayName(widget.dateTime.weekday),
-              style: TextStyle(fontSize: 16)),
-          Text(widget.dateTime.day.toString(),
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              )),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: _getAppointments(widget.dateTime),
-          ),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Column(
+          children: [
+            Text(_getDayName(widget.dateTime.weekday),
+                style: TextStyle(fontSize: 16)),
+            Text(widget.dateTime.day.toString(),
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                )),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: _getAppointments(widget.dateTime),
+            ),
+          ],
+        ),
       ),
     );
   }

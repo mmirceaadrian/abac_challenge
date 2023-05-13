@@ -18,6 +18,10 @@ class DiagnoseStepperState {
 
   String? error;
 
+  bool sortByPrice;
+  bool sortByRating;
+  bool sortByTime;
+
   DiagnoseStepperState(
       {this.selectedSpaceship,
       this.selectedComponents = const [],
@@ -27,7 +31,10 @@ class DiagnoseStepperState {
       this.currentStepperIndex = 0,
       this.returnButtonText = 'INAPOI',
       this.nextButtonText = 'INAINTE',
-      this.selectedDate});
+      this.selectedDate,
+      this.sortByPrice = false,
+      this.sortByRating = false,
+      this.sortByTime = false});
 
   DiagnoseStepperState copyWith({
     Spaceship? selectedSpaceship,
@@ -39,16 +46,23 @@ class DiagnoseStepperState {
     String? returnButtonText,
     String? nextButtonText,
     DateTime? selectedDate,
+    bool? sortByPrice,
+    bool? sortByRating,
+    bool? sortByTime,
   }) {
     return DiagnoseStepperState(
-        selectedSpaceship: selectedSpaceship ?? this.selectedSpaceship,
-        selectedComponents: selectedComponents ?? this.selectedComponents,
-        searchedComponents: searchedComponents ?? this.searchedComponents,
-        appointmentCells: appointmentCells ?? this.appointmentCells,
-        error: error ?? this.error,
-        currentStepperIndex: currentStepperIndex ?? this.currentStepperIndex,
-        returnButtonText: returnButtonText ?? this.returnButtonText,
-        nextButtonText: nextButtonText ?? this.nextButtonText,
-        selectedDate: selectedDate ?? this.selectedDate);
+      selectedSpaceship: selectedSpaceship ?? this.selectedSpaceship,
+      selectedComponents: selectedComponents ?? this.selectedComponents,
+      searchedComponents: searchedComponents ?? this.searchedComponents,
+      appointmentCells: appointmentCells ?? this.appointmentCells,
+      error: error ?? this.error,
+      currentStepperIndex: currentStepperIndex ?? this.currentStepperIndex,
+      returnButtonText: returnButtonText ?? this.returnButtonText,
+      nextButtonText: nextButtonText ?? this.nextButtonText,
+      selectedDate: selectedDate ?? this.selectedDate,
+      sortByPrice: sortByPrice ?? this.sortByPrice,
+      sortByRating: sortByRating ?? this.sortByRating,
+      sortByTime: sortByTime ?? this.sortByTime,
+    );
   }
 }
