@@ -9,6 +9,7 @@ class ServiceModel {
   int reviews;
   double duration;
   String image;
+  double distance = Random().nextDouble() * 10;
 
   ServiceModel({
     required this.serviceId,

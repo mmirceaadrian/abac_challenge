@@ -123,17 +123,46 @@ class DiagnoseStepperBloc
     }
 
     if (event is DiagnoseStepperFilter) {
-      state.sortedServices = state.searchedServices;
+      var sortedServices = state.searchedServices;
       if (state.sortByPrice) {
         if (state.sortByRating) {
-          state.sortedServices.sort((a, b) =>
-              a.cost.compareTo(b.cost) & b.rating.compareTo(a.rating));
-        } else {
-          state.sortedServices.sort((a, b) => a.cost.compareTo(b.cost));
+          if (state.sortByTime) {
+            sortedServices.sort((a, b) =>
+                a.cost.compareTo(b.cost) &
+                b.rating.compareTo(a.rating) &
+                a.distance.compareTo(b.distance));
+            emit(state.copyWith(sortedServices: sortedServices));
+            return;
+          } else {
+            sortedServices.sort((a, b) =>
+                a.cost.compareTo(b.cost) & b.rating.compareTo(a.rating));
+            emit(state.copyWith(sortedServices: sortedServices));
+            return;
+          }
         }
-      } else if (state.sortByRating) {
-        state.sortedServices.sort((a, b) => b.rating.compareTo(a.rating));
+        if (state.sortByTime) {
+          sortedServices.sort((a, b) =>
+              a.cost.compareTo(b.cost) & a.distance.compareTo(b.distance));
+          emit(state.copyWith(sortedServices: sortedServices));
+          return;
+        }
+        sortedServices.sort((a, b) => a.cost.compareTo(b.cost));
       }
+      if (state.sortByRating) {
+        if (state.sortByTime) {
+          sortedServices.sort((a, b) =>
+              b.rating.compareTo(a.rating) & a.distance.compareTo(b.distance));
+          emit(state.copyWith(sortedServices: sortedServices));
+          return;
+        }
+        sortedServices.sort((a, b) => b.rating.compareTo(a.rating));
+      }
+      if (state.sortByTime) {
+        sortedServices.sort((a, b) => a.distance.compareTo(b.distance));
+        emit(state.copyWith(sortedServices: sortedServices));
+        return;
+      }
+      emit(state.copyWith(sortedServices: sortedServices));
     }
 
     // Event for searching services

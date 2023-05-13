@@ -163,7 +163,8 @@ Step buildStepThree(Spaceship? spaceship, BuildContext context) {
                             .map((service) => Expanded(
                                   child: MediumCard(
                                     title: service.name,
-                                    subtitle: service.location,
+                                    subtitle:
+                                        '${service.location} - ${service.distance.round()} km',
                                     image: service.image,
                                     bottomText:
                                         'Cost estimate ${service.cost.toString()} RON',
