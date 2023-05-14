@@ -5,6 +5,7 @@ import 'package:abac_challenge/src/models/spaceship_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+/// Widget for the big card of a spaceship
 class SpaceshipBigCard extends StatelessWidget {
   final Spaceship spaceship;
 

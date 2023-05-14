@@ -2,6 +2,9 @@ import 'package:abac_challenge/constants.dart';
 import 'package:abac_challenge/src/models/appointmentcell_model.dart';
 import 'package:flutter/material.dart';
 
+/// Widget for displaying a day in the calendar
+///
+/// This widget is used to display a day in the calendar
 class DayWidget extends StatefulWidget {
   final DateTime dateTime;
   final int maxHours;

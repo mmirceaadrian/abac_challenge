@@ -72,6 +72,7 @@ class DiagnoseStepperSearchService extends DiagnoseStepperEvent {
   DiagnoseStepperSearchService({required this.query});
 }
 
+// event for filtering the services
 class DiagnoseStepperFilter extends DiagnoseStepperEvent {}
 
 class DiagnoseStepperSelectService extends DiagnoseStepperEvent {

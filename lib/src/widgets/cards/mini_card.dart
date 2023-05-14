@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// This widget is used to display a mini card with the spaceship information
 class SpaceshipMiniCard extends StatelessWidget {
   final String? title;
   final String? subtitle;

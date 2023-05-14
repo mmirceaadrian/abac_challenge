@@ -10,6 +10,9 @@ import 'package:abac_challenge/src/widgets/stepper/steptwo_component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+/// View for the diagnose stepper
+///
+/// This view is used to display the diagnose stepper, which is used to make an appointment
 class DiagnoseStepperView extends StatelessWidget {
   final Spaceship spaceship;
   const DiagnoseStepperView({Key? key, required this.spaceship})

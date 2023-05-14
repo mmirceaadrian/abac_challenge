@@ -7,6 +7,7 @@ import 'package:abac_challenge/src/repository/auth_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// Register screenß
 class RegisterView extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
@@ -37,7 +38,7 @@ class RegisterView extends StatelessWidget {
           child: Form(
             key: _formKey,
             child: Padding(
-              padding:const EdgeInsets.symmetric(horizontal: 40),
+              padding: const EdgeInsets.symmetric(horizontal: 40),
               child: isSmallScreen
                   ? Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -127,7 +128,7 @@ class RegisterView extends StatelessWidget {
                       isPasswordVisible: !state.isPasswordVisible),
                 ),
           ),
-          border:const OutlineInputBorder(),
+          border: const OutlineInputBorder(),
         ),
         obscureText: !state.isPasswordVisible,
         validator: (value) =>

@@ -8,7 +8,7 @@ import '../../config/config.dart';
 
 /// Repository for the spaceships
 ///
-/// This repository is used to manage the data of the spaceships
+/// This repository is used to manage the data from backend of the spaceships
 class SpaceshipsRepo {
   /// This method is used to get the spaceships from the API
   Future<List<Spaceship>> getSpaceships() async {

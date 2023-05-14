@@ -7,6 +7,9 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../../../constants.dart';
 
+/// Main screen
+///
+/// This screen is used to show the navbar and the main content of the app
 class MainView extends StatelessWidget {
   const MainView({Key? key}) : super(key: key);
 

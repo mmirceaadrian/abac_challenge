@@ -1,4 +1,6 @@
 /// Model for the Spaceship object
+///
+/// This model is used to represent a spaceship
 class Spaceship {
   final int spaceshipId;
   final String name;

@@ -2,6 +2,9 @@ import 'package:abac_challenge/src/models/appointmentcell_model.dart';
 import 'package:abac_challenge/src/widgets/calendar/day_widget.dart';
 import 'package:flutter/material.dart';
 
+/// Widget for the calendar view
+///
+/// This widget is used to display a calendar
 class CalendarView extends StatefulWidget {
   final int startHour;
   final int endHour;

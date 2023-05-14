@@ -7,7 +7,11 @@ import 'package:abac_challenge/src/models/spaceship_component_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
+/// Repository for the diagnose screen
+///
+/// This repository is used to manage the data from backe nd of the diagnose screen
 class DiagnoseRepo {
+  // should request just some spaceships, not all, in order to improve performance and avoid a lot of data
   Future<List<SpaceshipComponent>> searchComponent(String searchString) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
@@ -93,6 +97,7 @@ class DiagnoseRepo {
     }
   }
 
+  // should request just some services, not all, in order to improve performance and avoid a lot of data
   Future<List<ServiceModel>> getServices(String searchString) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');

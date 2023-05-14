@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/auth/login/login_event.dart';
 import '../../bloc/form_state.dart';
 
+// Login screen
 class LoginView extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 

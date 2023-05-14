@@ -1,5 +1,8 @@
 import 'dart:math';
 
+/// Model for the service
+///
+/// This model is used to represent a service
 class ServiceModel {
   int serviceId;
   String name;

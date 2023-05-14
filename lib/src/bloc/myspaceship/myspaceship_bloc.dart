@@ -19,6 +19,7 @@ class MyspaceshipBloc extends Bloc<MyspaceshipEvent, MyspaceshipState> {
   /// This method is used to manage the events of the bloc
   Future<void> _onEvent(
       MyspaceshipEvent event, Emitter<MyspaceshipState> emit) async {
+    // Event for loading the spaceships
     if (event is MyspaceshipEventLoading) {
       emit(state.copyWith(spaceships: [], isLoading: true));
       try {

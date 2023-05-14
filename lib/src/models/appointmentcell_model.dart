@@ -1,3 +1,6 @@
+/// Model for AppointmentCell
+///
+/// This model is used to represent an appointment cell
 class AppointmentCell {
   int appointmentId;
   DateTime date;

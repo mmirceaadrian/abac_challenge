@@ -5,6 +5,7 @@ import 'package:abac_challenge/src/widgets/calendar/calendar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+/// Step two of the diagnose stepper
 Step buildStepTwo(BuildContext context) {
   return Step(
     label: Center(

@@ -8,6 +8,7 @@ import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+/// Step three of the diagnose stepper
 Step buildStepThree(Spaceship? spaceship, BuildContext context) {
   String formattedDate = '';
   DateTime? date = context.read<DiagnoseStepperBloc>().state.selectedDate;

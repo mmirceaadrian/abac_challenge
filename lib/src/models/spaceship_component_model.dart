@@ -1,3 +1,6 @@
+/// Model for spaceship component
+///
+/// This model is used to represent a spaceship component
 class SpaceshipComponent {
   int spaceshipComponentId;
   String name;

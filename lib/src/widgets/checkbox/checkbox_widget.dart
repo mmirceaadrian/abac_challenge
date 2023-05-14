@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// Widget for the checkbox
+///
+/// This widget is used to create a checkbox with a title.
 class CheckBoxWidget extends StatelessWidget {
   final String? title;
   final bool? value;

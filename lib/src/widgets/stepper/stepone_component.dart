@@ -6,6 +6,7 @@ import 'package:abac_challenge/src/models/spaceship_component_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+/// Widget for the first step of the diagnose stepper
 Step buildStepOne(BuildContext context) {
   var currentQuantity = 1;
   return Step(
