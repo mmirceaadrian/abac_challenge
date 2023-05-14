@@ -1,12 +1,16 @@
+import 'package:abac_challenge/dependency_injection.dart';
 import 'package:abac_challenge/src/bloc/session/session_cubit.dart';
 import 'package:abac_challenge/src/navigation/session_navigator.dart';
+import 'package:abac_challenge/src/repository/auth_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'constants.dart';
-import 'src/repository/auth_repo.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  Injector.configure(Flavor.MOCK);
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -28,7 +32,7 @@ class MyApp extends StatelessWidget {
         child: MultiRepositoryProvider(
           providers: [
             RepositoryProvider<AuthRepo>(
-              create: (context) => AuthRepo(),
+              create: (context) => Injector().authRepo,
             ),
           ],
           child: BlocProvider(

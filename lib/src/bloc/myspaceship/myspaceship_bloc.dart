@@ -1,8 +1,7 @@
 import 'package:abac_challenge/src/bloc/myspaceship/myspaceship_event.dart';
 import 'package:abac_challenge/src/bloc/myspaceship/myspaceship_state.dart';
+import 'package:abac_challenge/src/repository/spaceships_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../repository/spaceships_repo.dart';
 
 /// Bloc for the myspaceship screen
 ///
