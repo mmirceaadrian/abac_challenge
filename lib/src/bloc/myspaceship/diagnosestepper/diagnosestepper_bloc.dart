@@ -5,6 +5,9 @@ import 'package:abac_challenge/src/models/appointmentcell_model.dart';
 import 'package:abac_challenge/src/repository/diagnose_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+/// Bloc for the diagnose stepper
+///
+/// This bloc is used to manage the state of the diagnose stepper
 class DiagnoseStepperBloc
     extends Bloc<DiagnoseStepperEvent, DiagnoseStepperState> {
   final DiagnoseRepo diagnoseRepo;

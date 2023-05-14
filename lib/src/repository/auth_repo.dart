@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 /// Repository for the auth screen
 ///
-/// This repository is used to manage the authentication
+/// This repository is used to manage the authentication data from backend
 class AuthRepo {
   /// This method is used to attempt the auto login
   Future<String> attemptAutoLogin() async {
