@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:abac_challenge/src/repository/auth_repo.dart';
 import 'package:abac_challenge/src/repository/diagnose_repo.dart';
 import 'package:abac_challenge/src/repository/mock/auth_repo_mock.dart';

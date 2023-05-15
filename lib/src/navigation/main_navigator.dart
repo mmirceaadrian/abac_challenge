@@ -2,7 +2,6 @@ import 'package:abac_challenge/dependency_injection.dart';
 import 'package:abac_challenge/src/bloc/main/main_cubit.dart';
 import 'package:abac_challenge/src/bloc/main/main_state.dart';
 import 'package:abac_challenge/src/repository/diagnose_repo.dart';
-import 'package:abac_challenge/src/repository/production/diagnose_repo_prod.dart';
 import 'package:abac_challenge/src/repository/spaceships_repo.dart';
 import 'package:abac_challenge/src/screens/main/myspaceships/diagnose_stepper_view.dart';
 import 'package:abac_challenge/src/screens/main/myspaceships/myspaceship_view.dart';

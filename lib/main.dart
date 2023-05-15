@@ -8,7 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'constants.dart';
 
 void main() {
+  // This line is used to configure the dependency injection
   Injector.configure(Flavor.MOCK);
+  // Injector.configure(Flavor.PROD);
   runApp(const MyApp());
 }
 
