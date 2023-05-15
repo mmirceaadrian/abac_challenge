@@ -9,7 +9,9 @@ import 'constants.dart';
 
 void main() {
   // This line is used to configure the dependency injection
+  // Favlor.MOCK for mock data
   Injector.configure(Flavor.MOCK);
+  // Flavor.PROD for production data
   // Injector.configure(Flavor.PROD);
   runApp(const MyApp());
 }
