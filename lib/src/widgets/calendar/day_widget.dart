@@ -41,7 +41,7 @@ class DayWidgetState extends State<DayWidget> {
             )
           : null,
       child: Padding(
-        padding: const EdgeInsets.all(4.0),
+        padding: const EdgeInsets.all(2.0),
         child: Column(
           children: [
             Text(_getDayName(widget.dateTime.weekday),

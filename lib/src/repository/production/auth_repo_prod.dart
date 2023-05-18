@@ -14,7 +14,7 @@ class AuthRepoProd extends AuthRepo {
   @override
   Future<String> attemptAutoLogin() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    // prefs.remove('token'); // uncomment this line to test the auto login
+    prefs.remove('token'); // uncomment this line to test the auto login
     final String? token = prefs.getString('token');
     if (token != null) {
       return token;

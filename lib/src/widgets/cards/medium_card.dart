@@ -41,6 +41,7 @@ class MediumCard extends StatelessWidget {
                     // row with title and subtitle and rating
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         // column with title and subtitle
                         Column(
@@ -64,8 +65,32 @@ class MediumCard extends StatelessWidget {
                             ),
                           ],
                         ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 16),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              rating != null
+                                  ? Icon(
+                                      Icons.star,
+                                      color: Colors.yellow,
+                                      size: 20,
+                                    )
+                                  : Container(),
+                              Text(
+                                rating != null ? rating! : '',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black.withOpacity(0.4),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
+
                     // row with bottom text
                     Padding(
                       padding: const EdgeInsets.only(top: 32.0),
@@ -82,26 +107,7 @@ class MediumCard extends StatelessWidget {
                 ),
               ),
               // row with rating and reviews
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  rating != null
-                      ? Icon(
-                          Icons.star,
-                          color: Colors.yellow,
-                          size: 20,
-                        )
-                      : Container(),
-                  Text(
-                    rating != null ? rating! : '',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black.withOpacity(0.4),
-                    ),
-                  ),
-                ],
-              ),
+
               //image
               SizedBox(
                 height: 100,
